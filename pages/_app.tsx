@@ -6,6 +6,8 @@ import { AppProps } from "next/app";
 import Head from "next/head";
 import "../src/assets/styles.css";
 import { theme } from "../src/assets/theme";
+import Footer from "../src/Layout/Footer";
+import Navbar from "../src/Layout/Navbar";
 import createEmotionCache from "../src/utils/createEmotionCache";
 
 // Client-side cache, shared for the whole session of the user in the browser.
@@ -31,6 +33,7 @@ export default function MyApp(props: MyAppProps) {
           flexDirection="column"
           className="background"
         >
+          <Navbar />
           <Box
             component={"main"}
             id="scroller"
@@ -40,6 +43,7 @@ export default function MyApp(props: MyAppProps) {
           >
             <Component {...pageProps} />
           </Box>
+          <Footer />
         </Stack>
       </ThemeProvider>
     </CacheProvider>
