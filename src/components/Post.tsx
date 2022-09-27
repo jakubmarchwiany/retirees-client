@@ -11,12 +11,14 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import dayjs from "dayjs";
+import "dayjs/locale/pl";
 import relativeTime from "dayjs/plugin/relativeTime"; // import plugin
 import parse from "html-react-parser";
 import { useState } from "react";
 import { ExpandMoreIcon } from "./my/ExpandMore";
 import { PostType } from "./post.interface";
 dayjs.extend(relativeTime);
+dayjs.locale("pl");
 
 const POST_IMAGE_PATH = process.env.NEXT_PUBLIC_POST_IMAGE_PATH;
 
