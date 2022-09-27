@@ -3,7 +3,7 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import Post from "../src/components/Post";
-import { PostType } from "../src/models/post";
+import { PostType } from "../src/components/post.interface";
 import { getFetch } from "../src/utils/fetches";
 
 const ENV = process.env.NEXT_PUBLIC_ENV;

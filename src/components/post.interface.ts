@@ -1,4 +1,4 @@
-export type PostType = {
+export interface PostType {
   id: string;
   isTrip: boolean;
   title: string;
@@ -6,4 +6,4 @@ export type PostType = {
   endDate: Date;
   imageID: string;
   content: string;
-};
+}

@@ -16,8 +16,7 @@ import parse from "html-react-parser";
 import { useState } from "react";
 import { PostType } from "../models/post";
 import { ExpandMoreIcon } from "./my/ExpandMore";
-
-dayjs.locale("pl");
+import { PostType } from "./post.interface";
 dayjs.extend(relativeTime);
 
 const POST_IMAGE_PATH = process.env.NEXT_PUBLIC_POST_IMAGE_PATH;
