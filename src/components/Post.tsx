@@ -14,7 +14,6 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime"; // import plugin
 import parse from "html-react-parser";
 import { useState } from "react";
-import { PostType } from "../models/post";
 import { ExpandMoreIcon } from "./my/ExpandMore";
 import { PostType } from "./post.interface";
 dayjs.extend(relativeTime);
@@ -52,9 +51,16 @@ function Post({ post }: Props) {
       }}
     >
       <CardHeader
-        title={<Typography variant="h4">{post.title}</Typography>}
+        title={
+          <Typography sx={{ typography: { xs: "h6", sm: "h4" } }}>
+            {post.title}
+          </Typography>
+        }
         subheader={
-          <Typography variant="h6" alignContent={"center"}>
+          <Typography
+            sx={{ typography: { xs: "caption", sm: "h6" } }}
+            alignContent={"center"}
+          >
             {subheader()}
           </Typography>
         }
@@ -88,7 +94,7 @@ function Post({ post }: Props) {
           <ExpandMore />
         </ExpandMoreIcon>
 
-        <Typography variant="h5" alignContent={"center"}>
+        <Typography variant="h6" alignContent={"center"}>
           Więcej informacji
         </Typography>
         <ExpandMoreIcon

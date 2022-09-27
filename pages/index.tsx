@@ -9,8 +9,6 @@ import { getFetch } from "../src/utils/fetches";
 const ENV = process.env.NEXT_PUBLIC_ENV;
 const DEV_API_ENDPOINT = process.env.NEXT_PUBLIC_DEV_API_ENDPOINT;
 
-console.log(ENV)
-
 const Home: NextPage = () => {
   const [isLoading, setLoading] = useState(true);
   const [page, setPage] = useState<number>(1);
@@ -62,10 +60,13 @@ const Home: NextPage = () => {
         <link rel="canonical" href="/" />
       </Head>
       <Stack
-        sx={{ mx: { xs: 1, sm: 10, md: 20, lg: 30, xl: 40 }, my: 3 }}
+        sx={{
+          mx: { xs: 1, sm: 10, md: 20, lg: 30, xl: 40 },
+          my: { xs: 1, sm: 1.5, lg: 2 },
+        }}
         justifyContent="center"
         alignItems="center"
-        spacing={3}
+        spacing={{ xs: 1, sm: 1.5, lg: 2 }}
       >
         <Pagination
           size="large"
