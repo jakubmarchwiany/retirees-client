@@ -1,7 +1,17 @@
 {
-  "name": "test-app",
-  "version": "0.1.0",
-  "private": true,
+  "name": "retirees-client",
+  "version": "1.0.0",
+  "description": "Retirees Client",
+  "homepage": "https://github.com/xkvbikx/retirees-client",
+  "license": "GPL-3.0-or-later",
+  "author": {
+    "name": "Jakub Marchwiany",
+    "email": "jacobmarchwiany@gmail.com"
+  },
+  "engines": {
+    "node": "~16.15.1",
+    "npm": "~8.19.2"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
