@@ -16,17 +16,28 @@ import relativeTime from "dayjs/plugin/relativeTime"; // import plugin
 import parse from "html-react-parser";
 import { useState } from "react";
 import { ExpandMoreIcon } from "./my/ExpandMore";
-import { PostType } from "./post.interface";
+
 dayjs.extend(relativeTime);
 dayjs.locale("pl");
 
-const POST_IMAGE_PATH = process.env.NEXT_PUBLIC_POST_IMAGE_PATH;
-
-type Props = {
-  post: PostType;
+export type PostType = {
+  id: string;
+  isTrip: boolean;
+  title: string;
+  startDate: Date;
+  endDate: Date;
+  imageURL: string;
+  content: string;
 };
 
-function Post({ post }: Props) {
+function Post({
+  isTrip,
+  title,
+  startDate,
+  endDate,
+  imageURL,
+  content,
+}: PostType) {
   const [expanded, setExpanded] = useState(false);
 
   const handleExpandClick = () => {
@@ -34,13 +45,11 @@ function Post({ post }: Props) {
   };
 
   const subheader = () => {
-    if (post.isTrip)
-      return `Data wyjazdu: ${dayjs(post.startDate).format(
-        "DD.MM.YYYY"
-      )} - ${dayjs(post.endDate).format("DD.MM.YYYY")} (${dayjs(
-        post.startDate
-      ).fromNow()})`;
-    else return `Data: ${dayjs(post.startDate).format("DD.MM.YYYY")}`;
+    if (isTrip)
+      return `Data wyjazdu: ${dayjs(startDate).format("DD.MM.YYYY")} - ${dayjs(
+        endDate
+      ).format("DD.MM.YYYY")} (${dayjs(startDate).fromNow()})`;
+    else return `Data: ${dayjs(startDate).format("DD.MM.YYYY")}`;
   };
 
   return (
@@ -55,7 +64,7 @@ function Post({ post }: Props) {
       <CardHeader
         title={
           <Typography sx={{ typography: { xs: "h6", sm: "h4" } }}>
-            {post.title}
+            {title}
           </Typography>
         }
         subheader={
@@ -69,11 +78,11 @@ function Post({ post }: Props) {
       />
       <Divider />
 
-      {post.isTrip && (
+      {isTrip && (
         <>
           <CardMedia
             component="img"
-            image={POST_IMAGE_PATH + post.imageID}
+            image={imageURL}
             sx={{ objectFit: "contain", minWidth: "100%" }}
           />
           <Divider />
@@ -110,9 +119,7 @@ function Post({ post }: Props) {
       </Stack>
 
       <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent sx={{ mx: "2%", my: "2%" }}>
-          {parse(post.content)}
-        </CardContent>
+        <CardContent sx={{ mx: "2%", my: "2%" }}>{parse(content)}</CardContent>
       </Collapse>
     </Card>
   );
