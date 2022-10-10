@@ -55,6 +55,7 @@ function Navbar() {
             <Typography
               component={Button}
               disableRipple={true}
+              textTransform="none"
               variant="h6"
               sx={{
                 color: "#fff",
