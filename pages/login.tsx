@@ -1,14 +1,12 @@
 import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 import { Avatar, Box, Button, Container, Typography } from "@mui/material";
 import Head from "next/head";
-import { NextResponse } from "next/server";
 import { useState } from "react";
 import MyTextField from "../src/components/my/MyTextField";
 import Notification, { NotificationProps } from "../src/Layout/Notification";
-import { postFetch } from "../src/utils/fetches";
 
-const ENV = process.env.NEXT_PUBLIC_ENV;
-const DEV_API_ENDPOINT = process.env.NEXT_PUBLIC_DEV_API_ENDPOINT;
+const NODE_ENV = process.env.NODE_ENV;
+const DEV_BACKEND_API_ENDPOINT = process.env.NEXT_PUBLIC_DEV_BACKEND_URL;
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -21,21 +19,24 @@ function Login() {
 
   const onSubmit = () => {
     const END_POINT =
-      ENV === "development"
-        ? DEV_API_ENDPOINT
-        : window.location.origin + "/api";
+      NODE_ENV === "development"
+        ? DEV_BACKEND_API_ENDPOINT
+        : window.location.origin + "/backend";
 
-    postFetch<{ message: string }>(
-      { username, password },
-      END_POINT + `/auth/login`
-    )
-      .then(({ message }) => {
-        console.log(message);
-
-        window.location.href = window.location.origin + "/admin/home";
+    fetch(END_POINT + `/auth/login`, {
+      method: "POST",
+      credentials: "include",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, password }),
+    })
+      .then(async (response) => {
+        if (response.ok) {
+          window.location.href = window.location.origin + "/admin/home";
+        } else {
+          throw new Error();
+        }
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
         setNotification({
           open: true,
           message: "Podano nieprawidłowe dane uwierzytelniające",
