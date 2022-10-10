@@ -13,7 +13,7 @@
     "npm": "~8.19.2"
   },
   "scripts": {
-    "dev": "next dev",
+    "start:dev": "next dev",
     "build": "next build",
     "start": "next start -p 8080"
   },
