@@ -2,9 +2,10 @@ import { cleanEnv, str } from "envalid";
 
 function validateEnv() {
   cleanEnv(process.env, {
-    NEXT_PUBLIC_ENV: str(),
-    NEXT_PUBLIC_DEV_API_ENDPOINT: str(),
-    NEXT_PUBLIC_POST_IMAGE_PATH: str(),
+    POSTS_FILE_NAME: str(),
+    POSTS_FOLDER: str(),
+    GOOGLE_BUCKET_URL: str(),
+    NEXT_PUBLIC_DEV_BACKEND_URL: str(),
   });
 }
 export default validateEnv;
