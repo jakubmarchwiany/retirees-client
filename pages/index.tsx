@@ -2,12 +2,7 @@ import { Pagination, Skeleton, Stack, Typography } from "@mui/material";
 import type { NextPage } from "next";
 import Head from "next/head";
 import { useEffect, useState } from "react";
-import Post from "../src/components/Post";
-import { PostType } from "../src/components/post.interface";
-import { getFetch } from "../src/utils/fetches";
-
-const ENV = process.env.NEXT_PUBLIC_ENV;
-const DEV_API_ENDPOINT = process.env.NEXT_PUBLIC_DEV_API_ENDPOINT;
+import Post, { PostType } from "../src/components/Post";
 
 const Home: NextPage = () => {
   const [isLoading, setLoading] = useState(true);
@@ -20,32 +15,27 @@ const Home: NextPage = () => {
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     document.getElementById("scroller")!.scroll(0, 0);
     setPage(value);
-    setLoading(true);
   };
 
   useEffect(() => {
-    const END_POINT =
-      ENV === "development"
-        ? DEV_API_ENDPOINT
-        : window.location.origin + "/api";
-
-    getFetch<{ posts: PostType[]; numberOfPages: number }>(
-      END_POINT + `/posts?page=${page - 1}`
-    )
-      .then(({ posts, numberOfPages }) => {
-        setPosts(posts);
+    fetch("/api/posts")
+      .then((res) => res.json())
+      .then((data) => {
+        setPosts(data);
+        setNumberOfPages(Math.ceil(data.length / 5));
         setLoading(false);
-        setNumberOfPages(numberOfPages);
       })
       .catch(() => {
+        console.log("Error");
         setPosts([]);
         setLoading(false);
       });
-  }, [isLoading]);
+  }, []);
 
   const generatePosts = () => {
-    return posts?.map((item) => {
-      return <Post key={item.id} post={item} />;
+    const index = (page - 1) * 5;
+    return posts?.slice(index, index + 5).map((item) => {
+      return <Post key={item.id} {...item} />;
     });
   };
 
@@ -83,12 +73,12 @@ const Home: NextPage = () => {
               <Skeleton variant="rounded" width={"100%"} height={55} />
             </Stack>
           </>
-        ) : (
+        ) : posts?.length !== 0 ? (
           generatePosts()
+        ) : (
+          <Typography variant="h2">Coś poszło nie tak</Typography>
         )}
-        {posts?.length === 0 && (
-          <Typography variant="h2">Brak postów</Typography>
-        )}
+
         <Pagination
           size="large"
           count={numberOfPages}
