@@ -30,19 +30,35 @@ function Post({ isTrip, title, startDate, endDate, imageURL, content }: PostType
         setExpanded(!expanded);
     };
 
+    const isSameDay = () => {
+        if (dayjs(startDate).isSame(endDate, "day")) {
+            return true;
+        } else {
+            return false;
+        }
+    };
+
     const subheader = () => {
-        if (isTrip)
-            return `Data wyjazdu: ${dayjs(startDate).format("DD.MM.YYYY")} - ${dayjs(
-                endDate
-            ).format("DD.MM.YYYY")} (${dayjs(startDate).fromNow()})`;
-        else return `Data: ${dayjs(startDate).format("DD.MM.YYYY")}`;
+        if (isTrip) {
+            if (isSameDay()) {
+                return `Data rozpoczęcia [ ${dayjs(startDate).format(
+                    "DD.MM.YYYY"
+                )} ] [ jednodniowa ] [ ${dayjs(startDate).fromNow()} ]`;
+            } else {
+                return `Data rozpoczęcia [ ${dayjs(startDate).format("DD.MM.YY")} ] do [ ${dayjs(
+                    endDate
+                ).format("DD.MM.YY")} ] [ ${dayjs(startDate).fromNow()} ]`;
+            }
+        } else {
+            return `Data  [ ${dayjs(startDate).format("DD.MM.YYYY")} ]`;
+        }
     };
 
     return (
         <Card
             sx={{
                 width: "100%",
-                borderRadius: "1%",
+                borderRadius: 2,
                 backgroundColor: "background.default",
                 boxShadow: 15,
             }}
