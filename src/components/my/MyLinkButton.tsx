@@ -1,36 +1,40 @@
-import { Button, Link as MUILink, SvgIconTypeMap } from "@mui/material";
+import { Button, SvgIconTypeMap } from "@mui/material";
 import { OverridableComponent } from "@mui/material/OverridableComponent";
-import NextLink, { LinkProps } from "next/link";
+import Link from "next/link";
 
 type Props = {
-    isActive: boolean;
     text: string;
-    Icon: OverridableComponent<SvgIconTypeMap<{}, "svg">> & {
+    href: string;
+    isActive?: boolean;
+    size?: "small" | "medium" | "large";
+    textColor?: string;
+    Icon?: OverridableComponent<SvgIconTypeMap<{}, "svg">> & {
         muiName: string;
     };
     closeMenu?: () => void;
-} & LinkProps;
-
-let noActiveStyle = {
-    textDecoration: "none",
 };
 
-function MyLinkButton({ isActive, href, text, Icon, closeMenu }: Props) {
-    return isActive ? (
-        <></>
-    ) : (
-        <NextLink href={href} passHref>
-            <MUILink
-                component={Button}
-                size="large"
-                startIcon={<Icon fontSize="large" />}
+function MyLinkButton({
+    text,
+    href,
+    isActive = false,
+    size = "medium",
+    textColor = "secondary.contrastText",
+    Icon,
+    closeMenu,
+}: Props) {
+    return (
+        <Link href={href} passHref>
+            <Button
+                size={size}
+                startIcon={Icon && <Icon />}
+                disabled={isActive}
+                sx={{ color: textColor }}
                 onClick={closeMenu}
-                style={noActiveStyle}
-                sx={{ fontWeight: "inherit", color: "primary" }}
             >
                 {text}
-            </MUILink>
-        </NextLink>
+            </Button>
+        </Link>
     );
 }
 
