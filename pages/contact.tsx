@@ -21,15 +21,20 @@ function Contact() {
                 <Box textAlign="center">
                     <Typography variant="h1">Kontakt</Typography>
                     <Typography mt={10} mb={5} variant="h5">
-                        Znalazłeś błąd lub masz pytanie.
-                        <br /> Napisz mail.
-                        <br /> Staram sie odpisywać jak najszybciej
+                        Masz pytanie napisz maila na adres:
                         <br />
                         <br />
-                        <br /> Chełmscy emeryci
+                        <a href="mailto:name@email.com">chelmscyemerycisw@gmail.com</a>
+                        <br />
+                        <br />
+                        <br />
+                        Adres:
+
+                        <br /> Zarząd koła
                         <br /> 20-100 Chełm, Polska
+                        <br /> ul. Kolejowa 112
                         <br />
-                        <a href="mailto:name@email.com">???@gmail.com</a>
+                        <br />
                         <br />
                         <br />
                         <br /> Autorem strony jest Jakub Marchwiany
