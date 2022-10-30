@@ -57,6 +57,11 @@ export default function MyApp(props: MyAppProps) {
                     position="bottom-center"
                     gutter={10}
                     containerStyle={{ marginBottom: "40px" }}
+                    toastOptions={{
+                        style: {
+                            maxWidth: "500px",
+                        },
+                    }}
                 />
             </ThemeProvider>
         </CacheProvider>
