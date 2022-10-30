@@ -6,8 +6,8 @@ import { AppProps } from "next/app";
 import Head from "next/head";
 import "../src/assets/styles.css";
 import { theme } from "../src/assets/theme";
-import Footer from "../src/Layout/Footer";
-import Navbar from "../src/Layout/Navbar";
+import Footer from "../src/layout/Footer";
+import Navbar from "../src/layout/Navbar";
 import createEmotionCache from "../src/utils/createEmotionCache";
 
 // Client-side cache, shared for the whole session of the user in the browser.

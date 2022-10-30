@@ -3,7 +3,7 @@ import { Avatar, Box, Button, Container, Typography } from "@mui/material";
 import Head from "next/head";
 import { useState } from "react";
 import MyTextField from "../src/components/my/MyTextField";
-import Notification, { NotificationProps } from "../src/Layout/Notification";
+import Notification, { NotificationProps } from "../src/layout/Notification";
 
 const NODE_ENV = process.env.NODE_ENV;
 const DEV_BACKEND_API_ENDPOINT = process.env.NEXT_PUBLIC_DEV_BACKEND_URL;
