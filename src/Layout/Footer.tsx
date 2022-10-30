@@ -12,7 +12,7 @@ function Footer() {
                     mx: "10%",
                 }}
             >
-                Chełmscy Emeryci {new Date().getFullYear()}
+                Chełmscy Emeryci SW {new Date().getFullYear()}
             </Typography>
         </Stack>
     );
