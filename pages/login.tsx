@@ -2,129 +2,126 @@ import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 import { Avatar, Box, Button, Container, Typography } from "@mui/material";
 import Head from "next/head";
 import { useState } from "react";
+import toast from "react-hot-toast";
 import MyTextField from "../src/components/my/MyTextField";
-import Notification, { NotificationProps } from "../src/layout/Notification";
+import { sleep } from "./api/posts";
 
 const NODE_ENV = process.env.NODE_ENV;
 const DEV_BACKEND_API_ENDPOINT = process.env.NEXT_PUBLIC_DEV_BACKEND_URL;
 
+export const logging = async () => {
+    toast.success("Przekierowywanie do panelu admina", { duration: 4000 });
+    await sleep(1000);
+    const timer = toast.success("3");
+    await sleep(1000);
+    toast.success("2", { id: timer });
+    await sleep(1000);
+    toast.success("1", { id: timer });
+    await sleep(1000);
+    toast.success("1", { id: timer, duration: 1000 });
+    await sleep(1000);
+
+    if (NODE_ENV === "production") window.location.href = window.location.origin + "/admin/home";
+};
+
 function Login() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [notification, setNotification] = useState<NotificationProps>({
-    open: false,
-    message: "",
-    type: "error",
-  });
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
 
-  const onSubmit = () => {
-    const END_POINT =
-      NODE_ENV === "development"
-        ? DEV_BACKEND_API_ENDPOINT
-        : window.location.origin + "/backend";
+    const onSubmit = () => {
+        const END_POINT =
+            NODE_ENV === "development"
+                ? DEV_BACKEND_API_ENDPOINT
+                : window.location.origin + "/backend";
 
-    fetch(END_POINT + `/auth/login`, {
-      method: "POST",
-      credentials: "include",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username, password }),
-    })
-      .then(async (response) => {
-        if (response.ok) {
-          window.location.href = window.location.origin + "/admin/home";
-        } else {
-          throw new Error();
-        }
-      })
-      .catch(() => {
-        setNotification({
-          open: true,
-          message: "Podano nieprawidłowe dane uwierzytelniające",
-          type: "error",
-        });
-      });
-  };
+        const toastId = toast.loading("Ładowanie...");
+        fetch(END_POINT + `/auth/login`, {
+            method: "POST",
+            credentials: "include",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ username, password }),
+        })
+            .then(async (response) => {
+                const data = await response.json();
+                if (response.ok) {
+                    toast.success(data.message, { id: toastId });
+                    logging();
+                } else {
+                    toast.error(data.message, { id: toastId });
+                }
+            })
+            .catch(() => {
+                toast.error("Coś poszło nie tak :(", { id: toastId });
+            });
+    };
 
-  const closeNotification = () => {
-    setNotification({ ...notification, open: false });
-  };
-
-  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUsername(event.target.value);
-  };
-
-  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(event.target.value);
-  };
-
-  return (
-    <>
-      <Head>
-        <title>Logowanie</title>
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        <meta name="description" content="Logowanie do aplikacji" />
-      </Head>
-      <Container component="main" maxWidth="xs">
-        <Box
-          sx={{
-            marginTop: 8,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <Avatar
-            sx={{
-              mb: 4,
-              bgcolor: "primary.main",
-              width: "70px",
-              height: "70px",
-              color: "white",
-            }}
-          >
-            <LockOpenOutlinedIcon fontSize="large" />
-          </Avatar>
-
-          <Typography component="h1" variant="h4">
-            Zaloguj się
-          </Typography>
-          <Box component={"form"} noValidate sx={{ mt: 3 }}>
-            <MyTextField
-              name="username"
-              label="Nazwa użytkownika"
-              value={username}
-              onChange={handleEmailChange}
-              autoFocus
-            />
-
-            <MyTextField
-              name="password"
-              type="password"
-              label="Hasło"
-              autoComplete="current-password"
-              value={password}
-              onChange={handlePasswordChange}
-            />
-
-            <Button
-              type="button"
-              onClick={onSubmit}
-              fullWidth
-              variant="contained"
-              sx={{ mt: 2, mb: 2 }}
+    return (
+        <>
+            <Head>
+                <title>Logowanie</title>
+                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+                <meta name="description" content="Logowanie do aplikacji" />
+            </Head>
+            <Container
+                component="main"
+                sx={{
+                    px: { xs: 5, sm: 30, md: 15, lg: 30, xl: 40 },
+                }}
             >
-              Zaloguj
-            </Button>
-          </Box>
-        </Box>
-        <Notification
-          open={notification.open}
-          message={notification.message}
-          type={notification.type}
-          close={closeNotification}
-        />
-      </Container>
-    </>
-  );
+                <Box
+                    sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                    }}
+                >
+                    <Avatar
+                        sx={{
+                            mb: 4,
+                            bgcolor: "primary.main",
+                            width: "70px",
+                            height: "70px",
+                            color: "white",
+                        }}
+                    >
+                        <LockOpenOutlinedIcon fontSize="large" />
+                    </Avatar>
+
+                    <Typography component="h1" variant="h4">
+                        Zaloguj się
+                    </Typography>
+                    <Box component={"form"} noValidate sx={{ mt: 3 }}>
+                        <MyTextField
+                            name="username"
+                            label="Nazwa użytkownika"
+                            value={username}
+                            onChange={(event) => setUsername(event.target.value)}
+                            autoFocus
+                        />
+
+                        <MyTextField
+                            name="password"
+                            type="password"
+                            label="Hasło"
+                            autoComplete="current-password"
+                            value={password}
+                            onChange={(event) => setPassword(event.target.value)}
+                        />
+
+                        <Button
+                            type="button"
+                            onClick={onSubmit}
+                            fullWidth
+                            variant="contained"
+                            sx={{ mt: 2, mb: 2 }}
+                            disabled={username.length === 0 || password.length === 0}
+                        >
+                            Zaloguj
+                        </Button>
+                    </Box>
+                </Box>
+            </Container>
+        </>
+    );
 }
 export default Login;

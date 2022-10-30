@@ -8,44 +8,33 @@ const POSTS_FOLDER = process.env.POSTS_FOLDER;
 const GOOGLE_BUCKET_URL = process.env.GOOGLE_BUCKET_URL;
 
 type PostData = {
-  id: string;
-  isTrip: boolean;
-  title: string;
-  startDate: Date;
-  endDate: Date;
-  imageID: string;
-  content: string;
+    id: string;
+    isTrip: boolean;
+    title: string;
+    startDate: Date;
+    endDate: Date;
+    imageID: string;
+    content: string;
 };
+export const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<PostType[] | {}>
-) {
-  try {
-    let response = await fetch(
-      `${GOOGLE_BUCKET_URL}/${NODE_ENV}/${POSTS_FILE_NAME}`
-    );
+export default async function handler(req: NextApiRequest, res: NextApiResponse<PostType[] | {}>) {
+    let response = await fetch(`${GOOGLE_BUCKET_URL}/${NODE_ENV}/${POSTS_FILE_NAME}`);
     if (response.ok) {
-      let data = await response.json();
-
-      data = data.map((post: PostData) => {
-        return Object.assign(post, {
-          id: post.id,
-          isTrip: post.isTrip,
-          title: post.title,
-          startDate: post.startDate,
-          endDate: post.endDate,
-          imageURL:
-            `${GOOGLE_BUCKET_URL}/${NODE_ENV}/${POSTS_FOLDER}/` + post.imageID,
-          content: post.content,
-        }) as PostType;
-      });
-      res.status(200).send(data);
+        let data = await response.json();
+        data = data.map((post: PostData) => {
+            return Object.assign(post, {
+                id: post.id,
+                isTrip: post.isTrip,
+                title: post.title,
+                startDate: post.startDate,
+                endDate: post.endDate,
+                imageURL: `${GOOGLE_BUCKET_URL}/${NODE_ENV}/${POSTS_FOLDER}/` + post.imageID,
+                content: post.content,
+            }) as PostType;
+        });
+        res.status(200).send({ posts: data, message: "Udało się pobrać posty" });
     } else {
-      res.status(500).send([]);
+        res.status(500).send({ message: "Nie udało się pobrać postów" });
     }
-  } catch (error) {
-    console.log(error);
-    res.status(500).send([]);
-  }
 }
