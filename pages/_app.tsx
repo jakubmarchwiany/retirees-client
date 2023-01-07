@@ -4,8 +4,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
 import { AppProps } from "next/app";
 import Head from "next/head";
-import { useEffect } from "react";
-import toast, { Toaster, useToasterStore } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 import "../src/assets/styles.css";
 import { theme } from "../src/assets/theme";
 import Footer from "../src/layout/Footer";
@@ -21,15 +20,6 @@ interface MyAppProps extends AppProps {
 
 export default function MyApp(props: MyAppProps) {
     const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
-    const { toasts } = useToasterStore();
-
-    // Enforce Limit
-    useEffect(() => {
-        toasts
-            .filter((t) => t.visible) // Only consider visible toasts
-            .filter((_, i) => i >= 3) // Is toast index over limit
-            .forEach((t) => toast.dismiss(t.id)); // Dismiss – Use toast.remove(t.id) removal without animation
-    }, [toasts]);
 
     return (
         <CacheProvider value={emotionCache}>
