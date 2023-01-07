@@ -1,6 +1,6 @@
 /* eslint-disable import/no-anonymous-default-export */
 import type { NextApiRequest, NextApiResponse } from "next";
-import { PostType } from "../../src/components/Post";
+import { PostType } from "../../components/Post";
 
 const NODE_ENV = process.env.NODE_ENV;
 const POSTS_FILE_NAME = process.env.POSTS_FILE_NAME;
@@ -16,7 +16,6 @@ type PostData = {
     imageID: string;
     content: string;
 };
-export const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<PostType[] | {}>) {
     let response = await fetch(`${GOOGLE_BUCKET_URL}/${NODE_ENV}/${POSTS_FILE_NAME}`);

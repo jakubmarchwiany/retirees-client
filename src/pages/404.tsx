@@ -4,7 +4,7 @@ import { Container } from "@mui/system";
 import { NextPage } from "next";
 import Head from "next/head";
 
-import MyLinkButton from "../src/components/my/MyLinkButton";
+import MyLinkButton from "../components/my/MyLinkButton";
 
 const NotFound: NextPage = () => {
     return (

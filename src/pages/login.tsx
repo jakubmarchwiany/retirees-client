@@ -3,8 +3,8 @@ import { Avatar, Box, Button, Container, Typography } from "@mui/material";
 import Head from "next/head";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import MyTextField from "../src/components/my/MyTextField";
-import { sleep } from "../src/utils/useFull";
+import MyTextField from "../components/my/MyTextField";
+import { sleep } from "../utils/useFull";
 
 const NODE_ENV = process.env.NODE_ENV;
 const DEV_BACKEND_API_ENDPOINT = process.env.NEXT_PUBLIC_DEV_BACKEND_URL;

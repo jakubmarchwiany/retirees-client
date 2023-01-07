@@ -2,9 +2,9 @@ validateEnv();
 
 import createEmotionServer from "@emotion/server/create-instance";
 import Document, { Head, Html, Main, NextScript } from "next/document";
-import { theme } from "../src/assets/theme";
-import createEmotionCache from "../src/utils/createEmotionCache";
-import validateEnv from "../src/utils/validate-env";
+import { theme } from "../assets/theme";
+import createEmotionCache from "../utils/createEmotionCache";
+import validateEnv from "../utils/validate-env";
 
 export default class MyDocument extends Document {
     render() {

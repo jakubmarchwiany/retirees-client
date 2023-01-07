@@ -5,11 +5,11 @@ import { ThemeProvider } from "@mui/material/styles";
 import { AppProps } from "next/app";
 import Head from "next/head";
 import { Toaster } from "react-hot-toast";
-import "../src/assets/styles.css";
-import { theme } from "../src/assets/theme";
-import Footer from "../src/layout/Footer";
-import Navbar from "../src/layout/Navbar";
-import createEmotionCache from "../src/utils/createEmotionCache";
+import "../assets/styles.css";
+import { theme } from "../assets/theme";
+import Footer from "../layout/Footer";
+import Navbar from "../layout/Navbar";
+import createEmotionCache from "../utils/createEmotionCache";
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();

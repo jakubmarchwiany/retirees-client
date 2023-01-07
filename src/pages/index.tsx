@@ -3,7 +3,7 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import Post, { PostType } from "../src/components/Post";
+import Post, { PostType } from "../components/Post";
 
 const Home: NextPage = () => {
     const [isLoading, setLoading] = useState(true);
