@@ -1,4 +1,4 @@
-import { Container, Pagination, Skeleton, Stack, Typography } from "@mui/material";
+import { Container, Fab, Pagination, Skeleton, Stack, Typography } from "@mui/material";
 import type { NextPage } from "next";
 import Head from "next/head";
 import { useEffect, useState } from "react";
@@ -9,7 +9,9 @@ const Home: NextPage = () => {
     const [isLoading, setLoading] = useState(true);
     const [page, setPage] = useState<number>(1);
     const [posts, setPosts] = useState<PostType[] | undefined>(undefined);
+    const [tmpPosts, setTmpPosts] = useState<PostType[] | undefined>(undefined);
     const [numberOfPages, setNumberOfPages] = useState<number | undefined>(undefined);
+    const [isSortByDate, setIsSortByDate] = useState<boolean>(false);
 
     const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
         document.getElementById("scroller")!.scroll(0, 0);
@@ -45,6 +47,20 @@ const Home: NextPage = () => {
         });
     };
 
+    const sortPosts = () => {
+        if (isSortByDate) {
+            setPosts(tmpPosts);
+        } else {
+            setTmpPosts(posts);
+            setPosts(
+                [...posts!].sort(
+                    (a, b) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime()
+                )
+            );
+        }
+        setIsSortByDate(!isSortByDate);
+    };
+
     return (
         <>
             <Head>
@@ -61,12 +77,6 @@ const Home: NextPage = () => {
                     alignItems="center"
                     spacing={{ xs: 1, sm: 1.5, lg: 2 }}
                 >
-                    <Pagination
-                        size="large"
-                        count={numberOfPages}
-                        page={page}
-                        onChange={handleChange}
-                    />
                     {isLoading ? (
                         <>
                             <Stack width={"100%"} spacing={0.5}>
@@ -81,7 +91,6 @@ const Home: NextPage = () => {
                     ) : (
                         <Typography variant="h2">Brak postów</Typography>
                     )}
-
                     <Pagination
                         size="large"
                         count={numberOfPages}
@@ -89,6 +98,23 @@ const Home: NextPage = () => {
                         onChange={handleChange}
                     />
                 </Stack>
+                {posts && (
+                    <Fab
+                        size="large"
+                        color="primary"
+                        aria-label="add"
+                        variant="extended"
+                        onClick={sortPosts}
+                        sx={{
+                            position: "absolute",
+                            top: "12%",
+                            right: "3%",
+                            transform: "translateY(-50%)",
+                        }}
+                    >
+                        {isSortByDate ? "Sortuj po dacie dodania" : "Sortuj po dacie"}
+                    </Fab>
+                )}
             </Container>
         </>
     );
