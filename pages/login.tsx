@@ -4,22 +4,19 @@ import Head from "next/head";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import MyTextField from "../src/components/my/MyTextField";
-import { sleep } from "./api/posts";
+import { sleep } from "../src/utils/useFull";
 
 const NODE_ENV = process.env.NODE_ENV;
 const DEV_BACKEND_API_ENDPOINT = process.env.NEXT_PUBLIC_DEV_BACKEND_URL;
 
 export const logging = async () => {
-    toast.success("Przekierowywanie do panelu admina", { duration: 4000 });
+    toast.success("Przekierowywanie do panelu admina", { duration: 3000 });
     await sleep(1000);
-    const timer = toast.success("3");
-    await sleep(1000);
-    toast.success("2", { id: timer });
+    const timer = toast.success("2");
     await sleep(1000);
     toast.success("1", { id: timer });
     await sleep(1000);
-    toast.success("1", { id: timer, duration: 1000 });
-    await sleep(1000);
+    toast.success("0", { id: timer });
 
     if (NODE_ENV === "production") window.location.href = window.location.origin + "/admin/home";
 };
@@ -98,7 +95,6 @@ function Login() {
                             onChange={(event) => setUsername(event.target.value)}
                             autoFocus
                         />
-
                         <MyTextField
                             name="password"
                             type="password"
@@ -107,7 +103,6 @@ function Login() {
                             value={password}
                             onChange={(event) => setPassword(event.target.value)}
                         />
-
                         <Button
                             type="button"
                             onClick={onSubmit}
