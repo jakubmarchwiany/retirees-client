@@ -3,11 +3,14 @@ import { TextField } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
 const StyledTextField = styled(TextField)<TextFieldProps>(({ theme }) => ({
+    "& input": {
+        color: theme.palette.primary.contrastText,
+    },
     "& label": {
-        color: theme.palette.primary.main,
+        color: theme.palette.primary.contrastText,
     },
     "& label.Mui-focused": {
-        color: theme.palette.primary.main,
+        color: theme.palette.primary.contrastText,
     },
     "& .MuiOutlinedInput-root": {
         backgroundColor: "#f5f5f5",
@@ -36,10 +39,11 @@ const MyTextField = (props: TextFieldProps & MyTextFieldType) => (
         type={props.type !== undefined ? props.type : "text"}
         name={props.name}
         label={props.label}
+        variant="filled"
         placeholder={props.placeholder !== undefined ? props.placeholder : undefined}
         autoComplete={props.autoComplete !== undefined ? props.autoComplete : props.name}
         fullWidth
-        margin="normal"
+        margin="dense"
         value={props.value}
         onChange={props.onChange}
     />

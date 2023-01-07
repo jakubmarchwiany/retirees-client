@@ -86,7 +86,9 @@ function Post({ isTrip, title, startDate, endDate, imageURL, content }: PostType
                     <Divider />
                 </>
             )}
-
+            <Collapse in={expanded} timeout="auto" unmountOnExit>
+                <CardContent sx={{ mx: "2%", my: "2%" }}>{parse(content)}</CardContent>
+            </Collapse>
             <Stack
                 component={Button}
                 fullWidth
@@ -102,9 +104,8 @@ function Post({ isTrip, title, startDate, endDate, imageURL, content }: PostType
                 >
                     <ExpandMore />
                 </ExpandMoreIcon>
-
                 <Typography variant="h6" alignContent={"center"}>
-                    Więcej informacji
+                    {expanded ? "Ukryj informacje" : "Pokaż informacje"}
                 </Typography>
                 <ExpandMoreIcon
                     expand={expanded}
@@ -115,10 +116,6 @@ function Post({ isTrip, title, startDate, endDate, imageURL, content }: PostType
                     <ExpandMore />
                 </ExpandMoreIcon>
             </Stack>
-
-            <Collapse in={expanded} timeout="auto" unmountOnExit>
-                <CardContent sx={{ mx: "2%", my: "2%" }}>{parse(content)}</CardContent>
-            </Collapse>
         </Card>
     );
 }

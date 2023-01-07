@@ -8,9 +8,10 @@ type Props = {
     isActive?: boolean;
     size?: "small" | "medium" | "large";
     textColor?: string;
-    Icon?: OverridableComponent<SvgIconTypeMap<{}, "svg">> & {
+    Icon?: OverridableComponent<SvgIconTypeMap<unknown, "svg">> & {
         muiName: string;
     };
+    fullWidth?: boolean;
     closeMenu?: () => void;
 };
 
@@ -18,18 +19,20 @@ function MyLinkButton({
     text,
     href,
     isActive = false,
-    size = "medium",
+    size = "large",
     textColor = "secondary.contrastText",
     Icon,
+    fullWidth = false,
     closeMenu,
 }: Props) {
     return (
-        <Link href={href} passHref>
+        <Link href={href} style={{ textDecoration: "none" }}>
             <Button
                 size={size}
                 startIcon={Icon && <Icon />}
                 disabled={isActive}
                 sx={{ color: textColor }}
+                fullWidth={fullWidth}
                 onClick={closeMenu}
             >
                 {text}
@@ -37,5 +40,4 @@ function MyLinkButton({
         </Link>
     );
 }
-
 export default MyLinkButton;

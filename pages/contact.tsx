@@ -20,26 +20,23 @@ function Contact() {
             >
                 <Box textAlign="center">
                     <Typography variant="h1">Kontakt</Typography>
-                    <Typography mt={10} mb={5} variant="h5">
+                    <Typography mt="5%" variant="h5">
                         Masz pytanie napisz maila na adres:
-                        <br />
-                        <br />
+                    </Typography>
+                    <Typography mt="2.5%" variant="h5">
                         <a href="mailto:name@email.com">chelmscyemerycisw@gmail.com</a>
-                        <br />
-                        <br />
-                        <br />
-                        Adres:
-
-                        <br /> Zarząd koła
-                        <br /> 20-100 Chełm, Polska
-                        <br /> ul. Kolejowa 112
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br /> Autorem strony jest Jakub Marchwiany
-                        <br />
-                        <a href="mailto:name@email.com">jacobmarchwiany@gmail.com</a>
+                    </Typography>
+                    <Typography mt="5%" variant="h5">
+                        Adres: <br />
+                        Zarząd koła
+                        <br /> 20-100 Chełm,
+                        <br /> Polska ul. Kolejowa 112
+                    </Typography>
+                    <Typography mt="15%" variant="h5">
+                        Autorem strony jest Jakub Marchwiany
+                    </Typography>
+                    <Typography mt="2.5%" variant="h5">
+                        <a href="mailto:name@email.com">jakubmarchwiany@icloud.com</a>
                     </Typography>
                 </Box>
             </Container>
