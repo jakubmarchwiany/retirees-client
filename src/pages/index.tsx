@@ -14,7 +14,7 @@ const Home: NextPage = () => {
     const [isSortByDate, setIsSortByDate] = useState<boolean>(false);
 
     const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
-        document.getElementById("scroller")!.scroll(0, 0);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
         setPage(value);
     };
 
