@@ -1,8 +1,8 @@
 import { Icon, IconProps, styled } from "@mui/material";
 
-interface ExpandMoreProps extends IconProps {
+type ExpandMoreProps = {
     expand: boolean;
-}
+} & IconProps;
 
 export const ExpandMoreIcon = styled((props: ExpandMoreProps) => {
     const { expand, ...other } = props;
@@ -11,6 +11,6 @@ export const ExpandMoreIcon = styled((props: ExpandMoreProps) => {
     color: theme.palette.primary.main,
     transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
     transition: theme.transitions.create("transform", {
-        duration: theme.transitions.duration.shortest,
-    }),
+        duration: theme.transitions.duration.shortest
+    })
 }));

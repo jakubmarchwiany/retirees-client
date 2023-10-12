@@ -1,39 +1,22 @@
-import { Button, SvgIconTypeMap } from "@mui/material";
-import { OverridableComponent } from "@mui/material/OverridableComponent";
+import { Button, ButtonProps } from "@mui/material";
 import Link from "next/link";
 
 type Props = {
     text: string;
     href: string;
-    isActive?: boolean;
-    size?: "small" | "medium" | "large";
-    textColor?: string;
-    Icon?: OverridableComponent<SvgIconTypeMap<unknown, "svg">> & {
-        muiName: string;
-    };
-    fullWidth?: boolean;
-    closeMenu?: () => void;
+    isActive: boolean;
+    props?: ButtonProps;
 };
 
-function MyLinkButton({
-    text,
-    href,
-    isActive = false,
-    size = "large",
-    textColor = "secondary.contrastText",
-    Icon,
-    fullWidth = false,
-    closeMenu,
-}: Props) {
+function MyLinkButton({ href, isActive, text, props }: Props): JSX.Element {
     return (
-        <Link href={href} style={{ textDecoration: "none" }}>
+        <Link href={href} style={{ textDecoration: "none" }} passHref>
             <Button
-                size={size}
-                startIcon={Icon && <Icon />}
+                size="large"
                 disabled={isActive}
-                sx={{ color: textColor }}
-                fullWidth={fullWidth}
-                onClick={closeMenu}
+                fullWidth
+                sx={{ color: "primary.main" }}
+                {...props}
             >
                 {text}
             </Button>
