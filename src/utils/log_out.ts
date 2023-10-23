@@ -1,5 +1,6 @@
 import Cookies from "js-cookie";
 import toast from "react-hot-toast";
+
 import { sleeper } from "./sleeper";
 
 export async function authorizationFail(): Promise<void> {

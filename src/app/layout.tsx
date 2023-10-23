@@ -1,10 +1,12 @@
-import ThemeRegistry from "@/components/ThemeRegistry/ThemeRegistry";
-import Navbar from "@/components/layout/Navbar";
-import { Box, Stack } from "@mui/material";
-import { Toaster } from "react-hot-toast";
 import "../assets/global.css";
 
-export default function RootLayout({ children }: { children: React.ReactNode }): JSX.Element {
+import { Box, Stack } from "@mui/material";
+import { Toaster } from "react-hot-toast";
+
+import Navbar from "@/components/layout/Navbar";
+import ThemeRegistry from "@/components/ThemeRegistry/ThemeRegistry";
+
+export default function RootLayout({ children }: { children: JSX.Element }): JSX.Element {
 	return (
 		<html lang="en">
 			<body>
