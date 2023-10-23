@@ -1,8 +1,8 @@
 {
-	"name": "retirees-client",
+	"name": "retirees",
 	"version": "1.0.1",
-	"description": "Retirees Client",
-	"homepage": "https://github.com/xkvbikx/retirees-client",
+	"description": "Retirees",
+	"homepage": "https://github.com/xkvbikx/retirees",
 	"license": "GPL-3.0-or-later",
 	"author": {
 		"name": "Jakub Marchwiany",
