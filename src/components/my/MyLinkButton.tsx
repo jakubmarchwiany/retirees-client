@@ -10,11 +10,11 @@ type Props = {
 
 function MyLinkButton({ href, isActive, text, props }: Props): JSX.Element {
 	return (
-		<Link href={href} style={{ textDecoration: "none" }} passHref>
+		<Link href={href} passHref style={{ textDecoration: "none" }}>
 			<Button
-				size="large"
 				disabled={isActive}
 				fullWidth
+				size="large"
 				sx={{ color: "primary.main" }}
 				{...props}
 			>

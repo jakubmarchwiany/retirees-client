@@ -1,6 +1,4 @@
-import type { TextFieldProps } from "@mui/material";
-import { TextField } from "@mui/material";
-import { styled } from "@mui/material/styles";
+import { TextField, TextFieldProps, styled } from "@mui/material";
 
 const StyledTextField = styled(TextField)<TextFieldProps>(({ theme }) => ({
 	"& input": {
@@ -24,5 +22,5 @@ const StyledTextField = styled(TextField)<TextFieldProps>(({ theme }) => ({
 }));
 
 export default function MyTextField(props: TextFieldProps): JSX.Element {
-	return <StyledTextField variant="filled" fullWidth {...props} />;
+	return <StyledTextField fullWidth variant="filled" {...props} />;
 }

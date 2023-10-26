@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-/* eslint-disable @typescript-eslint/strict-boolean-expressions */
+/* eslint-disable @typescript-eslint/unbound-method */
 "use client";
 
 import type { EmotionCache, Options as OptionsOfCreateCache } from "@emotion/cache";
+
 import createCache from "@emotion/cache";
 import { CacheProvider as DefaultCacheProvider } from "@emotion/react";
 import { useServerInsertedHTML } from "next/navigation";
@@ -88,17 +89,15 @@ export default function NextAppDirEmotionCacheProvider(
 			<React.Fragment>
 				{globals.map(({ name, style }) => (
 					<style
-						key={name}
-						data-emotion={`${registry.cache.key}-global ${name}`}
-						// eslint-disable-next-line react/no-danger
 						dangerouslySetInnerHTML={{ __html: style }}
+						data-emotion={`${registry.cache.key}-global ${name}`}
+						key={name}
 					/>
 				))}
 				{styles && (
 					<style
-						data-emotion={dataEmotionAttribute}
-						// eslint-disable-next-line react/no-danger
 						dangerouslySetInnerHTML={{ __html: styles }}
+						data-emotion={dataEmotionAttribute}
 					/>
 				)}
 			</React.Fragment>

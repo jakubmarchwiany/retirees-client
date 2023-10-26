@@ -7,10 +7,10 @@ export default function ContactPage(): JSX.Element {
 			<Head>
 				<title>Kontakt</title>
 				<meta
-					name="description"
 					content="Strona kontaktowa. Tutaj znajdziesz dane kontaktowe"
+					name="description"
 				/>
-				<link rel="canonical" href="/contact" />
+				<link href="/contact" rel="canonical" />
 			</Head>
 			<Container
 				component="main"

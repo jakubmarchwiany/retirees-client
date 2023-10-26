@@ -9,8 +9,8 @@ import Typography from "@mui/material/Typography";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import MyLinkButton from "../my/MyLinkButton";
 import theme from "../ThemeRegistry/theme";
+import MyLinkButton from "../my/MyLinkButton";
 
 export default function Navbar(): JSX.Element {
 	const path = usePathname();
@@ -27,13 +27,13 @@ export default function Navbar(): JSX.Element {
 			}}
 		>
 			<Toolbar sx={{ justifyContent: "space-between", alignContent: "center" }}>
-				<Stack direction="row" alignItems="center">
+				<Stack alignItems="center" direction="row">
 					<Link href="/" style={{ textDecoration: "none" }}>
 						<Typography
-							variant="h6"
 							sx={{
 								color: "#fff"
 							}}
+							variant="h6"
 						>
 							{isPhone ? "Emeryci SW" : "Chełmscy Emeryci SW"}
 						</Typography>
@@ -43,21 +43,21 @@ export default function Navbar(): JSX.Element {
 				<Stack direction="row">
 					<MyLinkButton
 						href="/"
-						text={isPhone ? "" : "Strona główna"}
 						isActive={path === "/"}
 						props={{ startIcon: <Home /> }}
+						text={isPhone ? "" : "Strona główna"}
 					/>
 					<MyLinkButton
 						href="/contact"
-						text={isPhone ? "" : "Kontakt"}
 						isActive={path === "/contact"}
 						props={{ startIcon: <ContactMail /> }}
+						text={isPhone ? "" : "Kontakt"}
 					/>
 					<MyLinkButton
 						href="/login"
-						text={isPhone ? "" : "Logowanie"}
 						isActive={path === "/login"}
 						props={{ startIcon: <Login /> }}
+						text={isPhone ? "" : "Logowanie"}
 					/>
 				</Stack>
 			</Toolbar>
