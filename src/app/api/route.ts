@@ -1,18 +1,5 @@
-import type { NextApiRequest, NextApiResponse } from "next";
+import { NextResponse } from "next/server";
 
-type ResponseData = {
-	message: string;
-	data: { test: string };
-};
-
-export async function GET() {
-	// const res = await fetch("https://data.mongodb-api.com/...", {
-	// 	headers: {
-	// 		"Content-Type": "application/json",
-	// 		"API-Key": process.env.DATA_API_KEY
-	// 	}
-	// });
-	// const data = await res.json();
-
-	return Response.json({ message: "siema" });
+export function GET(): NextResponse {
+	return NextResponse.json({ string: "working" });
 }
