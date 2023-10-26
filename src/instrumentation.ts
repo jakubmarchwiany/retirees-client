@@ -1,5 +1,5 @@
-import validateEnv from "./utils/validate_env";
+import { validateEnv } from "./utils/validate_env";
 
-export function register() {
+export function register(): void {
 	validateEnv();
 }
