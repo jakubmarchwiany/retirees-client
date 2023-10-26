@@ -26,6 +26,7 @@
 		"@emotion/react": "^11.11.1",
 		"@emotion/style": "^0.8.0",
 		"@mui/icons-material": "^5.14.13",
+		"@mui/lab": "^5.0.0-alpha.150",
 		"@mui/material": "^5.14.13",
 		"ajv": "^8.12.0",
 		"js-cookie": "^3.0.5",
@@ -39,13 +40,19 @@
 	"devDependencies": {
 		"@commitlint/cli": "^17.7.2",
 		"@commitlint/config-conventional": "^17.7.0",
+		"@types/chance": "^1.1.5",
 		"@types/js-cookie": "^3.0.4",
 		"@types/jsonwebtoken": "^9.0.3",
+		"@types/mocha": "^10.0.2",
 		"@types/node": "^20",
 		"@types/react": "^18",
 		"@types/react-dom": "^18",
+		"@types/supertest": "^2.0.14",
+		"@types/web": "^0.0.118",
 		"@typescript-eslint/eslint-plugin": "^6.0.0",
 		"@typescript-eslint/parser": "^6.0.0",
+		"bun-types": "^1.0.7",
+		"chance": "^1.1.11",
 		"cspell": "^7.3.7",
 		"cspell-dict-pl_pl": "^1.1.1",
 		"envalid": "^8.0.0",
@@ -69,6 +76,7 @@
 		"lint-staged": "^14.0.1",
 		"prettier": "^3.0.3",
 		"rimraf": "^5.0.5",
+		"supertest": "^6.3.3",
 		"typescript": "^5"
 	}
 }

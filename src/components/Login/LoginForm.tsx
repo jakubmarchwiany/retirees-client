@@ -1,95 +1,83 @@
 "use client";
+
 import { postFetch } from "@/utils/fetches";
 import { sleep } from "@/utils/sleep";
-import { LockOpenOutlined } from "@mui/icons-material";
-import {
-	Avatar,
-	Button,
-	Checkbox,
-	FormControlLabel,
-	Stack,
-	TextField,
-	Typography
-} from "@mui/material";
-import Cookies from "js-cookie";
-import React, { SyntheticEvent, useState } from "react";
+import { LoadingButton } from "@mui/lab";
+import { Checkbox, FormControlLabel, Stack, TextField } from "@mui/material";
+import { useRouter, useSearchParams } from "next/navigation";
+import React, { SyntheticEvent, useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 export function LoginForm(): JSX.Element {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 	const [rememberMe, setRememberMe] = useState(false);
+	const [loading, setLoading] = useState(false);
+
+	const router = useRouter();
+	const searchParams = useSearchParams();
+
+	useEffect(() => {
+		const message = searchParams.get("message");
+
+		if (message !== null) {
+			toast.error(message);
+		}
+	}, []);
 
 	const handleLogin = (event: SyntheticEvent): void => {
 		event.preventDefault();
 
-		postFetch<{ data: { token: string } }>({ username, password }, `/auth/login`).then(
-			async ({ data }) => {
-				const { token } = data;
+		setLoading(true);
 
-				Cookies.set("authorization", token, {
-					expires: rememberMe ? 31 : undefined,
-					path: "/"
-				});
+		postFetch({ username, password, rememberMe }, `/auth/login`, { customError: true })
+			.then(async () => {
+				await sleep(500);
 
-				await sleep(1000);
-
-				window.location.reload();
-			}
-		);
+				router.replace("/admin");
+			})
+			.catch(() => {
+				setLoading(false);
+			});
 	};
 
 	return (
-		<Stack alignItems={"center"}>
-			<Avatar
-				sx={{
-					bgcolor: "primary.main",
-					width: "5rem",
-					height: "5rem",
-					color: "white"
+		<Stack component={"form"} mt={2} onSubmit={handleLogin}>
+			<TextField
+				label="Nazwa użytkownika"
+				onChange={(event: React.ChangeEvent<HTMLInputElement>): void => {
+					setUsername(event.target.value);
 				}}
+				value={username}
+				variant="filled"
+			/>
+			<TextField
+				label="Hasło"
+				onChange={(event: React.ChangeEvent<HTMLInputElement>): void => {
+					setPassword(event.target.value);
+				}}
+				type="password"
+				value={password}
+				variant="filled"
+			/>
+			<LoadingButton
+				disabled={username == "" || password == ""}
+				loading={loading}
+				type="submit"
+				variant="contained"
 			>
-				<LockOpenOutlined fontSize="large" />
-			</Avatar>
-
-			<Typography variant="h4" color="white" mt={1}>
-				Zaloguj się
-			</Typography>
-			<Stack component={"form"} onSubmit={handleLogin} mt={2}>
-				<TextField
-					label="Nazwa użytkownika"
-					value={username}
-					variant="filled"
-					onChange={(event: React.ChangeEvent<HTMLInputElement>): void => {
-						setUsername(event.target.value);
-					}}
-				/>
-				<TextField
-					label="Hasło"
-					type="password"
-					variant="filled"
-					value={password}
-					onChange={(event: React.ChangeEvent<HTMLInputElement>): void => {
-						setPassword(event.target.value);
-					}}
-				/>
-				<Button
-					type="submit"
-					variant="contained"
-					disabled={username == "" || password == ""}
-				>
-					Zaloguj
-				</Button>
-				<FormControlLabel
-					control={
-						<Checkbox
-							value={rememberMe}
-							onChange={(e): void => setRememberMe(e.target.checked)}
-						/>
-					}
-					label="Zapamiętaj mnie"
-					sx={{ color: "white" }}
-				/>
-			</Stack>
+				Zaloguj
+			</LoadingButton>
+			<FormControlLabel
+				control={
+					<Checkbox
+						onChange={(e): void => setRememberMe(e.target.checked)}
+						value={rememberMe}
+					/>
+				}
+				label="Zapamiętaj mnie"
+				sx={{ color: "white" }}
+			/>
 		</Stack>
 	);
 }
