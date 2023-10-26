@@ -2,16 +2,16 @@
 	"dictionaries": ["typescript", "css"],
 	"language": "en,pl",
 	"words": [
+		"Bobcia",
+		"bunx",
 		"commitlint",
 		"envalid",
-		"knip",
-		"reduxjs",
-		"Bobcia",
-		"lockb",
-		"knip",
-		"bunx",
 		"fontsource",
-		"outdir"
+		"knip",
+		"lockb",
+		"NEXTAUTH",
+		"outdir",
+		"reduxjs"
 	],
 	"ignorePaths": [
 		"node_modules",
