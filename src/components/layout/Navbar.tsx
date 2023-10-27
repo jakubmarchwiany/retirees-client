@@ -1,20 +1,35 @@
 "use client";
 
-import { ContactMail, Home, Login } from "@mui/icons-material";
-import { useMediaQuery } from "@mui/material";
+import { ContactMail, Info, Login, Logout } from "@mui/icons-material";
+import { Button, useMediaQuery } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Stack from "@mui/material/Stack";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import Cookies from "js-cookie";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 import theme from "../ThemeRegistry/theme";
 import MyLinkButton from "../my/MyLinkButton";
 
 export default function Navbar(): JSX.Element {
+	const [isAdmin, setIsAdmin] = useState(false);
 	const path = usePathname();
 	const isPhone = useMediaQuery(theme.breakpoints.down("md"));
+
+	const router = useRouter();
+	const token = Cookies.get("authorization");
+
+	useEffect(() => {
+		if (token !== undefined) {
+			setIsAdmin(true);
+		} else {
+			setIsAdmin(false);
+		}
+	}, [token]);
+
+	const url_prefix = isAdmin ? "/admin" : "/";
 
 	return (
 		<AppBar
@@ -26,39 +41,55 @@ export default function Navbar(): JSX.Element {
 				boxShadow: 3
 			}}
 		>
-			<Toolbar sx={{ justifyContent: "space-between", alignContent: "center" }}>
+			<Toolbar sx={{ justifyContent: "space-between", alignItems: "center" }}>
 				<Stack alignItems="center" direction="row">
-					<Link href="/" style={{ textDecoration: "none" }}>
-						<Typography
-							sx={{
-								color: "#fff"
-							}}
-							variant="h6"
-						>
-							{isPhone ? "Emeryci SW" : "Chełmscy Emeryci SW"}
-						</Typography>
-					</Link>
+					<Typography
+						sx={{
+							color: "#fff"
+						}}
+						variant="h6"
+					>
+						{isPhone ? "Emeryci SW" : "Chełmscy Emeryci SW"}
+					</Typography>
 				</Stack>
 
-				<Stack direction="row">
+				<Stack alignItems="center" direction="row">
 					<MyLinkButton
-						href="/"
-						isActive={path === "/"}
-						props={{ startIcon: <Home /> }}
-						text={isPhone ? "" : "Strona główna"}
+						href={url_prefix}
+						isActive={path === url_prefix}
+						props={{ startIcon: <Info /> }}
+						text={isPhone ? "" : "Informacje"}
 					/>
 					<MyLinkButton
-						href="/contact"
+						href={"/contact"}
 						isActive={path === "/contact"}
 						props={{ startIcon: <ContactMail /> }}
 						text={isPhone ? "" : "Kontakt"}
 					/>
-					<MyLinkButton
-						href="/login"
-						isActive={path === "/login"}
-						props={{ startIcon: <Login /> }}
-						text={isPhone ? "" : "Logowanie"}
-					/>
+
+					{isAdmin ? (
+						<Button
+							disabled={false}
+							fullWidth
+							onClick={(): void => {
+								Cookies.remove("authorization");
+
+								router.push("/");
+							}}
+							size="large"
+							startIcon={<Logout />}
+							sx={{ color: "primary.main" }}
+						>
+							{isPhone ? "" : "Wyloguj"}
+						</Button>
+					) : (
+						<MyLinkButton
+							href="/login"
+							isActive={path === "/login"}
+							props={{ startIcon: <Login /> }}
+							text={isPhone ? "" : "Logowanie"}
+						/>
+					)}
 				</Stack>
 			</Toolbar>
 		</AppBar>
