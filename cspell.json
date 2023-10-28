@@ -2,6 +2,7 @@
 	"dictionaries": ["typescript", "css"],
 	"language": "en,pl",
 	"words": [
+		"ampm",
 		"Bobcia",
 		"bunx",
 		"commitlint",

@@ -1,6 +1,6 @@
 "use client";
 
-import { ContactMail, Info, Login, Logout } from "@mui/icons-material";
+import { ContactMail, Info, Login, Logout, PostAdd } from "@mui/icons-material";
 import { Button, useMediaQuery } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Stack from "@mui/material/Stack";
@@ -68,20 +68,28 @@ export default function Navbar(): JSX.Element {
 					/>
 
 					{isAdmin ? (
-						<Button
-							disabled={false}
-							fullWidth
-							onClick={(): void => {
-								Cookies.remove("authorization");
+						<>
+							<MyLinkButton
+								href="/admin/post/create"
+								isActive={path === "/login"}
+								props={{ startIcon: <PostAdd /> }}
+								text={isPhone ? "" : "Stwórz"}
+							/>
+							<Button
+								disabled={false}
+								fullWidth
+								onClick={(): void => {
+									Cookies.remove("authorization");
 
-								router.push("/");
-							}}
-							size="large"
-							startIcon={<Logout />}
-							sx={{ color: "primary.main" }}
-						>
-							{isPhone ? "" : "Wyloguj"}
-						</Button>
+									router.push("/");
+								}}
+								size="large"
+								startIcon={<Logout />}
+								sx={{ color: "primary.main" }}
+							>
+								{isPhone ? "" : "Wyloguj"}
+							</Button>
+						</>
 					) : (
 						<MyLinkButton
 							href="/login"
