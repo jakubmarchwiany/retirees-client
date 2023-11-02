@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { Button, Modal, Stack } from "@mui/material";
+import "cropperjs/dist/cropper.css";
 import { useRef, useState } from "react";
 import { Cropper, ReactCropperElement } from "react-cropper";
 
