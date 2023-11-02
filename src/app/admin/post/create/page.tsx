@@ -22,7 +22,7 @@ export default function NewPostPage(): JSX.Element {
 				alignItems="center"
 				justifyContent="center"
 				mb={5}
-				sx={{ width: { xs: "95%", sm: "90%", md: "80%", lg: "70%", xl: "60%" } }}
+				sx={{ width: { xs: "95%", sm: "80%", md: "70%", lg: "60%", xl: "50%" } }}
 			>
 				<Typography component="h1" variant="h2">
 					Kreator posta

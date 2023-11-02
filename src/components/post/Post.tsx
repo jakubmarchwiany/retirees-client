@@ -61,7 +61,7 @@ export default function Post({
 	return (
 		<Card
 			sx={{
-				width: { xs: "95%", sm: "90%", md: "80%", lg: "70%", xl: "60%" },
+				width: { xs: "95%", sm: "80%", md: "70%", lg: "60%", xl: "50%" },
 				borderRadius: 5,
 				backgroundColor: "background.default",
 				boxShadow: 15
@@ -89,7 +89,12 @@ export default function Post({
 					<CardMedia
 						component="img"
 						image={imageURL}
-						sx={{ objectFit: "contain", minWidth: "100%" }}
+						sx={{
+							objectFit: "contain",
+							minWidth: "100%"
+							// width: "680px",
+							// height: "380px"
+						}}
 					/>
 					<Divider />
 				</>
