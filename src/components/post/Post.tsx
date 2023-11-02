@@ -11,25 +11,33 @@ import relativeTime from "dayjs/plugin/relativeTime"; // import plugin
 import parse from "html-react-parser";
 import { useState } from "react";
 
-import { ExpandMoreIcon } from "../my/ExpandMore";
-import { PostType } from "./post.type";
+import { ExpandMoreIcon } from "./ExpandMore";
 
 dayjs.extend(relativeTime);
 
 dayjs.locale("pl");
 
+type Props = {
+	id: string;
+	title: string;
+	startDate: string;
+	endDate: string | undefined;
+	imageURL: string | undefined;
+	content: string;
+};
+
 export default function Post({
-	isTrip,
+	id,
 	title,
 	startDate,
 	endDate,
 	imageURL,
 	content
-}: PostType): JSX.Element {
-	const [expanded, setExpanded] = useState(false);
+}: Props): JSX.Element {
+	const [isExpand, setIsExpand] = useState(false);
 
 	const handleExpandClick = (): void => {
-		setExpanded(!expanded);
+		setIsExpand(!isExpand);
 	};
 
 	const isSameDay = (): boolean => {
@@ -41,26 +49,20 @@ export default function Post({
 	};
 
 	const subheader = (): string => {
-		if (isTrip) {
-			if (isSameDay()) {
-				return `Data rozpoczęcia [ ${dayjs(startDate).format(
-					"DD.MM.YYYY"
-				)} ] [ jednodniowa ] [ ${dayjs(startDate).fromNow()} ]`;
-			} else {
-				return `Data rozpoczęcia [ ${dayjs(startDate).format("DD.MM.YY")} ] do [ ${dayjs(
-					endDate
-				).format("DD.MM.YY")} ] [ ${dayjs(startDate).fromNow()} ]`;
-			}
+		if (endDate !== undefined) {
+			return `Data od [ ${dayjs(startDate).format("DD.MM.YYYY")} ] do [ ${dayjs(
+				endDate
+			).format("DD.MM.YYYY")} ] `;
 		} else {
-			return `Data  [ ${dayjs(startDate).format("DD.MM.YYYY")} ]`;
+			return `Data [ ${dayjs(startDate).format("DD.MM.YYYY")} ]`;
 		}
 	};
 
 	return (
 		<Card
 			sx={{
-				width: "100%",
-				borderRadius: 2,
+				width: { xs: "95%", sm: "90%", md: "80%", lg: "70%", xl: "60%" },
+				borderRadius: 5,
 				backgroundColor: "background.default",
 				boxShadow: 15
 			}}
@@ -74,11 +76,15 @@ export default function Post({
 						{subheader()}
 					</Typography>
 				}
-				title={<Typography sx={{ typography: { xs: "h6", sm: "h4" } }}>{title}</Typography>}
+				title={
+					<Typography sx={{ typography: { xs: "h6", sm: "h4" } }}>
+						{title ? title : "Brak tytułu"}
+					</Typography>
+				}
 			/>
 			<Divider />
 
-			{isTrip && (
+			{imageURL !== undefined && (
 				<>
 					<CardMedia
 						component="img"
@@ -88,8 +94,8 @@ export default function Post({
 					<Divider />
 				</>
 			)}
-			<Collapse in={expanded} timeout="auto" unmountOnExit>
-				<CardContent sx={{ mx: "2%", my: "2%" }}>{parse(content)}</CardContent>
+			<Collapse in={isExpand} timeout="auto" unmountOnExit>
+				<CardContent sx={{ mx: "1%" }}>{parse(content)}</CardContent>
 			</Collapse>
 			<Stack
 				component={Button}
@@ -99,20 +105,20 @@ export default function Post({
 				onClick={handleExpandClick}
 			>
 				<ExpandMoreIcon
-					aria-expanded={expanded}
+					aria-expanded={isExpand}
 					aria-label="show more"
-					expand={expanded}
+					expand={isExpand}
 					sx={{ height: "32px" }}
 				>
 					<ExpandMore />
 				</ExpandMoreIcon>
 				<Typography alignContent={"center"} variant="h6">
-					{expanded ? "Ukryj informacje" : "Pokaż informacje"}
+					{isExpand ? "Ukryj informacje" : "Pokaż informacje"}
 				</Typography>
 				<ExpandMoreIcon
-					aria-expanded={expanded}
+					aria-expanded={isExpand}
 					aria-label="show more"
-					expand={expanded}
+					expand={isExpand}
 					sx={{ height: "32px" }}
 				>
 					<ExpandMore />
