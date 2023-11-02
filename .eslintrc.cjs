@@ -201,7 +201,14 @@ module.exports = {
 		],
 		"object-shorthand": "error",
 		"typescript-sort-keys/interface": "off",
-		"n/no-missing-import": "off"
+		"n/no-missing-import": "off",
+		"n/no-extraneous-import": [
+			"error",
+			{
+				allowModules: ["cropperjs"],
+				resolvePaths: []
+			}
+		]
 	},
 	settings: {
 		react: {
