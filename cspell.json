@@ -1,5 +1,8 @@
 {
-	"dictionaries": ["typescript", "css"],
+	"dictionaries": [
+		"typescript",
+		"css"
+	],
 	"language": "en,pl",
 	"words": [
 		"ampm",
@@ -13,7 +16,8 @@
 		"lockb",
 		"NEXTAUTH",
 		"outdir",
-		"reduxjs"
+		"reduxjs",
+		"uuidv"
 	],
 	"ignorePaths": [
 		"node_modules",
@@ -22,5 +26,7 @@
 		".commitlint.config.cjs",
 		"src/__tests__/generator"
 	],
-	"import": ["node_modules/cspell-dict-pl_pl/cspell-ext.json"]
+	"import": [
+		"node_modules/cspell-dict-pl_pl/cspell-ext.json"
+	]
 }
