@@ -101,3 +101,53 @@ export async function postFetch<T>(
 			});
 	});
 }
+
+export async function formDataFetch<T>(
+	body: FormData,
+	url: string,
+	options?: { customError?: boolean }
+): Promise<T & { message: string }> {
+	return await new Promise((resolve, reject) => {
+		const toastId = toast.loading("Ładowanie...");
+
+		fetch(NEXT_PUBLIC_API_ENDPOINT + url, {
+			method: "POST",
+			credentials: "include",
+			headers: {
+				// "Content-Type": "application/json",
+				Authorization: `Bearer ${Cookies.get("authorization")}`
+			},
+			body
+		})
+			.then(async (response) => {
+				const data = (await response.json()) as T & { message: string };
+
+				if (response.ok) {
+					toast.success(data.message, { id: toastId });
+
+					resolve(data);
+				} else {
+					toast.error(data.message, { id: toastId });
+
+					if (response.status === 401) {
+						await authorizationFail();
+					}
+
+					if (options?.customError !== undefined) {
+						reject(data);
+					}
+				}
+			})
+			.catch((error) => {
+				if (NODE_ENV === "development") {
+					console.log(error);
+				}
+
+				toast.error("Coś poszło nie tak :(", { id: toastId });
+
+				if (options?.customError !== undefined) {
+					reject(error);
+				}
+			});
+	});
+}
