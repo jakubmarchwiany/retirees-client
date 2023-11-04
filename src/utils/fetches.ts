@@ -17,8 +17,7 @@ export async function getFetch<T>(
 			method: "GET",
 			credentials: "include",
 			headers: {
-				"Content-Type": "application/json",
-				Authorization: `Bearer ${Cookies.get("authorization")}`
+				"Content-Type": "application/json"
 			}
 		})
 			.then(async (response) => {
@@ -64,8 +63,7 @@ export async function postFetch<T>(
 			method: "POST",
 			credentials: "include",
 			headers: {
-				"Content-Type": "application/json",
-				Authorization: `Bearer ${Cookies.get("authorization")}`
+				"Content-Type": "application/json"
 			},
 			body: JSON.stringify(body)
 		})
@@ -103,7 +101,7 @@ export async function postFetch<T>(
 }
 
 export async function formDataFetch<T>(
-	body: FormData,
+	formData: FormData,
 	url: string,
 	options?: { customError?: boolean }
 ): Promise<T & { message: string }> {
@@ -113,11 +111,7 @@ export async function formDataFetch<T>(
 		fetch(NEXT_PUBLIC_API_ENDPOINT + url, {
 			method: "POST",
 			credentials: "include",
-			headers: {
-				// "Content-Type": "application/json",
-				Authorization: `Bearer ${Cookies.get("authorization")}`
-			},
-			body
+			body: formData
 		})
 			.then(async (response) => {
 				const data = (await response.json()) as T & { message: string };
