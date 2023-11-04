@@ -1,8 +1,5 @@
 {
-	"dictionaries": [
-		"typescript",
-		"css"
-	],
+	"dictionaries": ["typescript", "css"],
 	"language": "en,pl",
 	"words": [
 		"ampm",
@@ -20,13 +17,12 @@
 		"uuidv"
 	],
 	"ignorePaths": [
+		"key_google_bucket.json",
 		"node_modules",
 		"build",
 		"bun.lockb",
 		".commitlint.config.cjs",
 		"src/__tests__/generator"
 	],
-	"import": [
-		"node_modules/cspell-dict-pl_pl/cspell-ext.json"
-	]
+	"import": ["node_modules/cspell-dict-pl_pl/cspell-ext.json"]
 }

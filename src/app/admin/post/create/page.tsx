@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 "use client";
@@ -7,37 +10,40 @@ import { ImageSelector } from "@/components/create_post/ImageSelector";
 import TextEditor from "@/components/create_post/TextEditor";
 import Post from "@/components/post/Post";
 import { postValidation } from "@/components/post/post.validation";
+import { dataURLtoFile } from "@/utils/dataURLToFile";
 import { formDataFetch } from "@/utils/fetches";
 import { Button, Stack, TextField, Typography } from "@mui/material";
 import { Dayjs } from "dayjs";
 import { useState } from "react";
 
 export default function NewPostPage(): JSX.Element {
-	const [title, setTitle] = useState("");
-
+	const [title, setTitle] = useState<string>("");
 	const [startDate, setStartDate] = useState<Dayjs | undefined>(undefined);
 	const [endDate, setEndDate] = useState<Dayjs | undefined>(undefined);
 	const [cropImage, setCropImage] = useState<string | undefined>(undefined);
-	const [content, setContent] = useState("");
+	const [content, setContent] = useState<string>("");
 
 	const addPost = (): void => {
 		if (postValidation(title, startDate, content)) {
-			const body = new FormData() as FormData;
+			const formData = new FormData();
 
-			body.set("title", title);
+			formData.append("title", title);
 
-			body.set("startDate", startDate!.toString());
+			formData.append("startDate", startDate!.toString());
+
+			if (cropImage !== undefined) {
+				const file = dataURLtoFile(cropImage, `post_image.png`);
+
+				formData.append("file", file);
+			}
 
 			if (endDate !== undefined) {
-				body.set("endDate", endDate.toString());
-			}
-			if (cropImage !== undefined) {
-				body.set("image", cropImage);
+				formData.append("endDate", endDate.toString());
 			}
 
-			body.set("content", content);
+			formData.append("content", content);
 
-			formDataFetch(body, "/admin/posts/-/create").then(() => {});
+			formDataFetch(formData, "/admin/posts/-/create").then(() => {});
 		}
 	};
 
