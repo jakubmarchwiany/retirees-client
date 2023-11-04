@@ -1,4 +1,4 @@
-import { Post } from "@/types/post.type";
+import { PostType } from "@/types/post.type";
 import { Storage } from "@google-cloud/storage";
 import sharp from "sharp";
 import { v4 as uuidv4 } from "uuid";
@@ -9,13 +9,13 @@ const storage = new Storage({ projectId: GOOGLE_PROJECT_ID, keyFilename: GOOGLE_
 
 const bucket = storage.bucket(GOOGLE_BUCKET_NAME);
 
-async function downloadPostsFromBucket(): Promise<Post[]> {
+async function downloadPostsFromBucket(): Promise<PostType[]> {
 	const data = await bucket.file(`${NODE_ENV}/posts_data.json`).download();
 
-	return JSON.parse(data.toString()) as Post[];
+	return JSON.parse(data.toString()) as PostType[];
 }
 
-async function savePostsToBucket(data: Post[]): Promise<void> {
+async function savePostsToBucket(data: PostType[]): Promise<void> {
 	const file = bucket.file(`${NODE_ENV}/posts_data.json`);
 
 	const content = JSON.stringify(data);

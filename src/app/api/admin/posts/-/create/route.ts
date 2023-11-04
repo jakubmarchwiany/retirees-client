@@ -1,5 +1,5 @@
 import { validateObject } from "@/middlewares/validate_object";
-import { Post } from "@/types/post.type";
+import { PostType } from "@/types/post.type";
 import { createResponse } from "@/utils/create_response";
 import {
 	downloadPostsFromBucket,
@@ -7,6 +7,7 @@ import {
 	uploadPostImageToBucket
 } from "@/utils/google_bucket.api";
 import { NextResponse } from "next/server";
+import { v4 as uuidv4 } from "uuid";
 
 import { CreatePostData, createPostDataSchema } from "./create_post.schema";
 
@@ -30,7 +31,7 @@ export async function POST(req: Request): Promise<NextResponse> {
 
 		const postsData = await downloadPostsFromBucket();
 
-		let newPost: Post;
+		let newPost: PostType;
 
 		if (file !== null) {
 			const bytes = await file.arrayBuffer();
@@ -39,9 +40,9 @@ export async function POST(req: Request): Promise<NextResponse> {
 
 			const imageName = await uploadPostImageToBucket(buffer);
 
-			newPost = { title, startDate, endDate, imageName, content };
+			newPost = { id: uuidv4(), title, startDate, endDate, imageName, content };
 		} else {
-			newPost = { title, startDate, endDate, content };
+			newPost = { id: uuidv4(), title, startDate, endDate, content };
 		}
 
 		postsData.unshift(newPost);
