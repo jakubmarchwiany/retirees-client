@@ -19,10 +19,10 @@ export function ImageSelector({ setCropImage }: Props): JSX.Element {
 	): void => {
 		setSelectedImage(selectedImage);
 
+		setCropImage(undefined);
+
 		if (selectedImage !== undefined) {
 			setIsImageEditorOpen(true);
-
-			setCropImage(undefined);
 		}
 	};
 
