@@ -6,6 +6,7 @@ import {
 	savePostsToBucket,
 	uploadPostImageToBucket
 } from "@/utils/google_bucket.api";
+import { revalidateTag } from "next/cache";
 import { NextResponse } from "next/server";
 import { v4 as uuidv4 } from "uuid";
 
@@ -48,6 +49,8 @@ export async function POST(req: Request): Promise<NextResponse> {
 		postsData.unshift(newPost);
 
 		await savePostsToBucket(postsData);
+
+		revalidateTag("posts_update");
 
 		return createResponse(200, "Udało się dodać post");
 	} catch (error) {
