@@ -11,8 +11,11 @@ import { postValidation } from "@/app/admin/post/create/components/post.validati
 import Post from "@/app/components/post/Post";
 import { dataURLtoFile } from "@/app/components/utils/dataURLToFile";
 import { formDataFetch } from "@/app/components/utils/fetches";
-import { Button, Stack, TextField, Typography } from "@mui/material";
+import { sleep } from "@/app/components/utils/sleep";
+import { LoadingButton } from "@mui/lab";
+import { Stack, TextField, Typography } from "@mui/material";
 import { Dayjs } from "dayjs";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 import { ImageSelector } from "./components/image/ImageSelector";
@@ -23,6 +26,10 @@ export default function NewPostPage(): JSX.Element {
 	const [endDate, setEndDate] = useState<Dayjs | undefined>(undefined);
 	const [cropImage, setCropImage] = useState<string | undefined>(undefined);
 	const [content, setContent] = useState<string>("");
+
+	const [isLoading, setIsLoading] = useState<boolean>(false);
+
+	const router = useRouter();
 
 	const addPost = (): void => {
 		if (postValidation(title, startDate, content)) {
@@ -44,7 +51,17 @@ export default function NewPostPage(): JSX.Element {
 
 			formData.append("content", content);
 
-			formDataFetch(formData, "/admin/posts/-/create").then(() => {});
+			setIsLoading(true);
+
+			formDataFetch(formData, "/admin/posts/-/create", { customError: true })
+				.then(async () => {
+					await sleep(500);
+
+					router.push("/admin");
+				})
+				.catch(() => {
+					setIsLoading(false);
+				});
 		}
 	};
 
@@ -92,14 +109,15 @@ export default function NewPostPage(): JSX.Element {
 				title={title}
 			/>
 
-			<Button
+			<LoadingButton
 				color="success"
+				loading={isLoading}
 				onClick={addPost}
 				sx={{ mt: 2, width: { xs: "95%", sm: "80%", md: "70%", lg: "60%", xl: "50%" } }}
 				variant="contained"
 			>
 				Dodaj Post
-			</Button>
+			</LoadingButton>
 		</Stack>
 	);
 }
