@@ -34,7 +34,7 @@ export function LoginForm(): JSX.Element {
 			.then(async () => {
 				await sleep(500);
 
-				router.replace("/admin");
+				window.location.href = "/admin";
 			})
 			.catch(() => {
 				setLoading(false);
