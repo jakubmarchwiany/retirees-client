@@ -1,63 +1,30 @@
-"use client";
-
-import { ExpandMore } from "@mui/icons-material";
-import { Button, CardHeader, Collapse, Divider, Stack, Typography } from "@mui/material";
+import { PostType } from "@/types/post.type";
+import { CardHeader, Divider, Typography } from "@mui/material";
 import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import dayjs from "dayjs";
 import "dayjs/locale/pl";
 import relativeTime from "dayjs/plugin/relativeTime"; // import plugin
-import parse from "html-react-parser";
-import { useState } from "react";
 
-import { ExpandMoreIcon } from "./ExpandMore";
+import PostContent from "./PostContent";
 
 dayjs.extend(relativeTime);
 
 dayjs.locale("pl");
 
-type Props = {
-	id: string;
-	title: string;
-	startDate: string;
-	endDate: string | undefined;
-	imageURL: string | undefined;
-	content: string;
+const { GOOGLE_BUCKET_IMAGES_URL } = process.env;
+
+const subheader = (startDate: string, endDate: string | undefined): string => {
+	if (endDate !== undefined) {
+		return `Data od [ ${dayjs(startDate).format("DD.MM.YYYY")} ] do [ ${dayjs(endDate).format(
+			"DD.MM.YYYY"
+		)} ] `;
+	} else {
+		return `Data [ ${dayjs(startDate).format("DD.MM.YYYY")} ]`;
+	}
 };
 
-export default function Post({
-	id,
-	title,
-	startDate,
-	endDate,
-	imageURL,
-	content
-}: Props): JSX.Element {
-	const [isExpand, setIsExpand] = useState(false);
-
-	const handleExpandClick = (): void => {
-		setIsExpand(!isExpand);
-	};
-
-	const isSameDay = (): boolean => {
-		if (dayjs(startDate).isSame(endDate, "day")) {
-			return true;
-		} else {
-			return false;
-		}
-	};
-
-	const subheader = (): string => {
-		if (endDate !== undefined) {
-			return `Data od [ ${dayjs(startDate).format("DD.MM.YYYY")} ] do [ ${dayjs(
-				endDate
-			).format("DD.MM.YYYY")} ] `;
-		} else {
-			return `Data [ ${dayjs(startDate).format("DD.MM.YYYY")} ]`;
-		}
-	};
-
+export default function Post({ title, startDate, endDate, image, content }: PostType): JSX.Element {
 	return (
 		<Card
 			sx={{
@@ -73,7 +40,7 @@ export default function Post({
 						alignContent={"center"}
 						sx={{ typography: { xs: "caption", sm: "h6" } }}
 					>
-						{subheader()}
+						{subheader(startDate, endDate)}
 					</Typography>
 				}
 				title={
@@ -84,7 +51,7 @@ export default function Post({
 			/>
 			<Divider />
 
-			{imageURL !== undefined && (
+			{image !== undefined && (
 				<>
 					<CardMedia
 						component="img"
@@ -99,36 +66,7 @@ export default function Post({
 					<Divider />
 				</>
 			)}
-			<Collapse in={isExpand} timeout="auto" unmountOnExit>
-				<CardContent sx={{ mx: "1%" }}>{parse(content)}</CardContent>
-			</Collapse>
-			<Stack
-				component={Button}
-				direction={"row"}
-				fullWidth
-				justifyContent="center"
-				onClick={handleExpandClick}
-			>
-				<ExpandMoreIcon
-					aria-expanded={isExpand}
-					aria-label="show more"
-					expand={isExpand}
-					sx={{ height: "32px" }}
-				>
-					<ExpandMore />
-				</ExpandMoreIcon>
-				<Typography alignContent={"center"} variant="h6">
-					{isExpand ? "Ukryj informacje" : "Pokaż informacje"}
-				</Typography>
-				<ExpandMoreIcon
-					aria-expanded={isExpand}
-					aria-label="show more"
-					expand={isExpand}
-					sx={{ height: "32px" }}
-				>
-					<ExpandMore />
-				</ExpandMoreIcon>
-			</Stack>
+			<PostContent content={content} />
 		</Card>
 	);
 }
