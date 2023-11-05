@@ -55,7 +55,7 @@ export default function Post({ title, startDate, endDate, image, content }: Post
 				<>
 					<CardMedia
 						component="img"
-						image={imageURL}
+						image={GOOGLE_BUCKET_IMAGES_URL + image}
 						sx={{
 							objectFit: "contain",
 							minWidth: "100%"
