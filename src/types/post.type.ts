@@ -3,6 +3,6 @@ export type PostType = {
 	title: string;
 	startDate: string;
 	endDate?: string;
-	imageName?: string;
+	image?: string;
 	content: string;
 };

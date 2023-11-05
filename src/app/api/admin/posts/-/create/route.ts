@@ -38,9 +38,9 @@ export async function POST(req: Request): Promise<NextResponse> {
 
 			const buffer = Buffer.from(bytes);
 
-			const imageName = await uploadPostImageToBucket(buffer);
+			const image = await uploadPostImageToBucket(buffer);
 
-			newPost = { id: uuidv4(), title, startDate, endDate, imageName, content };
+			newPost = { id: uuidv4(), title, startDate, endDate, image, content };
 		} else {
 			newPost = { id: uuidv4(), title, startDate, endDate, content };
 		}
