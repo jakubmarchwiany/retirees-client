@@ -1,7 +1,7 @@
 "use client";
 
-import { postFetch } from "@/utils/fetches";
-import { sleep } from "@/utils/sleep";
+import { postFetch } from "@/app/components/utils/fetches";
+import { sleep } from "@/app/components/utils/sleep";
 import { LoadingButton } from "@mui/lab";
 import { Checkbox, FormControlLabel, Stack, TextField } from "@mui/material";
 import { useRouter, useSearchParams } from "next/navigation";

@@ -1,4 +1,4 @@
-import { LoginForm } from "@/components/Login/LoginForm";
+import { LoginForm } from "@/app/login/components/LoginForm";
 import { LockOpenOutlined } from "@mui/icons-material";
 import { Avatar, Container, Stack, Typography } from "@mui/material";
 

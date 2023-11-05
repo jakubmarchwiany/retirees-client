@@ -1,9 +1,9 @@
-import ThemeRegistry from "@/components/ThemeRegistry/ThemeRegistry";
-import Navbar from "@/components/layout/Navbar";
-import ToastProvider from "@/components/layout/ToastProvider";
+import ToastProvider from "@/app/components/layout/ToastProvider";
 import { Box, Stack } from "@mui/material";
 
 import "../assets/global.css";
+import ThemeRegistry from "./components/ThemeRegistry/ThemeRegistry";
+import Navbar from "./components/layout/Navbar";
 
 export default function RootLayout({ children }: { children: JSX.Element }): JSX.Element {
 	return (

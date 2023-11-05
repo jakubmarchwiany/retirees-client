@@ -1,7 +1,6 @@
-/* eslint-disable @typescript-eslint/prefer-optional-chain */
 import { NextRequest, NextResponse } from "next/server";
 
-import { authorization } from "./middlewares/authorization";
+import { authorization } from "./app/api/middlewares/authorization";
 
 export async function middleware(request: NextRequest): Promise<NextResponse> {
 	if (request.nextUrl.pathname.includes("admin")) {

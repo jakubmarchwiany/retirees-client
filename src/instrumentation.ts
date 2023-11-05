@@ -1,4 +1,4 @@
-import { validateEnv } from "./utils/validate_env";
+import { validateEnv } from "./validate_env";
 
 export function register(): void {
 	validateEnv();

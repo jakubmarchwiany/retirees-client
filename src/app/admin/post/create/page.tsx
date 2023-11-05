@@ -5,16 +5,17 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 "use client";
 
-import DateForm from "@/components/create_post/DateForm";
-import { ImageSelector } from "@/components/create_post/ImageSelector";
-import TextEditor from "@/components/create_post/TextEditor";
-import Post from "@/components/post/Post";
-import { postValidation } from "@/components/post/post.validation";
-import { dataURLtoFile } from "@/utils/dataURLToFile";
-import { formDataFetch } from "@/utils/fetches";
+import DateForm from "@/app/admin/post/create/components/DateForm";
+import TextEditor from "@/app/admin/post/create/components/TextEditor";
+import { postValidation } from "@/app/admin/post/create/components/post.validation";
+import Post from "@/app/components/post/Post";
+import { dataURLtoFile } from "@/app/components/utils/dataURLToFile";
+import { formDataFetch } from "@/app/components/utils/fetches";
 import { Button, Stack, TextField, Typography } from "@mui/material";
 import { Dayjs } from "dayjs";
 import { useState } from "react";
+
+import { ImageSelector } from "./components/image/ImageSelector";
 
 export default function NewPostPage(): JSX.Element {
 	const [title, setTitle] = useState<string>("");

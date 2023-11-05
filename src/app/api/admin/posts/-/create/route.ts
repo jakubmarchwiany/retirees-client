@@ -1,11 +1,11 @@
-import { validateObject } from "@/middlewares/validate_object";
-import { PostType } from "@/types/post.type";
-import { createResponse } from "@/utils/create_response";
+import { validateObject } from "@/app/api/middlewares/validate_object";
+import { createResponse } from "@/app/api/utils/create_response";
 import {
 	downloadPostsFromBucket,
 	savePostsToBucket,
 	uploadPostImageToBucket
-} from "@/utils/google_bucket.api";
+} from "@/app/api/utils/google_bucket.api";
+import { PostType } from "@/types/post.type";
 import { revalidateTag } from "next/cache";
 import { NextResponse } from "next/server";
 import { v4 as uuidv4 } from "uuid";

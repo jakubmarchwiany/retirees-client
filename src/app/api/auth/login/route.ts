@@ -1,10 +1,10 @@
-import { validate } from "@/middlewares/validate.middleware";
-import { createResponse } from "@/utils/create_response";
-import { getErrorMessage } from "@/utils/get_error_message";
+import { validate } from "@/app/api/middlewares/validate.middleware";
 import * as jose from "jose";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
+import { createResponse } from "../../utils/create_response";
+import { getErrorMessage } from "../../utils/get_error_message";
 import { LoginData, loginDataSchema } from "./login_credentials.schema";
 
 const { ADMIN_USERNAME, ADMIN_PASSWORD, JWT_SECRET } = process.env;

@@ -1,5 +1,5 @@
-import Post from "@/components/post/Post";
-import PostsPagination from "@/components/post/PostsPagination";
+import Post from "@/app/components/post/Post";
+import PostsPagination from "@/app/components/post/PostsPagination";
 import { PostType } from "@/types/post.type";
 import { Stack } from "@mui/material";
 

@@ -12,7 +12,7 @@ export function dataURLtoFile(dataUrl: string, filename: string): File | null {
 	// Extract the MIME type from the metadata
 	const mimeMatch = metadata.match(/:(.*?);/);
 
-	if (mimeMatch === /* eslint-disable @typescript-eslint/no-floating-promises */ null) {
+	if (mimeMatch === null) {
 		// Invalid MIME type
 		return null;
 	}
