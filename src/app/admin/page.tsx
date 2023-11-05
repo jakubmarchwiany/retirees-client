@@ -3,6 +3,8 @@ import PostsPagination from "@/components/post/PostsPagination";
 import { PostType } from "@/types/post.type";
 import { Stack } from "@mui/material";
 
+const { GOOGLE_BUCKET_IMAGES_URL } = process.env;
+
 async function getData(currentPage: number): Promise<{ posts: PostType[]; numberOfPages: number }> {
 	const dataFetch = await fetch(
 		"https://storage.googleapis.com/retirees-chelm.appspot.com/development/posts_data.json",
@@ -15,8 +17,16 @@ async function getData(currentPage: number): Promise<{ posts: PostType[]; number
 
 	const startIndex = currentPage === 1 ? 0 : (currentPage - 1) * 5;
 
-	const trimPosts = posts.slice(startIndex, startIndex + 5);
+	let trimPosts = posts.slice(startIndex, startIndex + 5);
 	const numberOfPages = Math.ceil(posts.length / 5);
+
+	trimPosts = trimPosts.map((p) => {
+		if (p.image !== undefined) {
+			return { ...p, image: GOOGLE_BUCKET_IMAGES_URL + p.image };
+		} else {
+			return p;
+		}
+	});
 
 	return { posts: trimPosts, numberOfPages };
 }

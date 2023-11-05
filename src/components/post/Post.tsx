@@ -12,8 +12,6 @@ dayjs.extend(relativeTime);
 
 dayjs.locale("pl");
 
-const { GOOGLE_BUCKET_IMAGES_URL } = process.env;
-
 const subheader = (startDate: string, endDate: string | undefined): string => {
 	if (endDate !== undefined) {
 		return `Data od [ ${dayjs(startDate).format("DD.MM.YYYY")} ] do [ ${dayjs(endDate).format(
@@ -55,7 +53,7 @@ export default function Post({ title, startDate, endDate, image, content }: Post
 				<>
 					<CardMedia
 						component="img"
-						image={GOOGLE_BUCKET_IMAGES_URL + image}
+						image={image}
 						sx={{
 							objectFit: "contain",
 							minWidth: "100%"

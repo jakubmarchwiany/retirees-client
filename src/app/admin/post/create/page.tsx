@@ -86,7 +86,7 @@ export default function NewPostPage(): JSX.Element {
 				content={content}
 				endDate={endDate && endDate.toString()}
 				id={"1"}
-				imageURL={cropImage}
+				image={cropImage}
 				startDate={startDate !== undefined ? startDate.toString() : "Brak daty"}
 				title={title}
 			/>
