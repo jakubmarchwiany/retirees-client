@@ -1,7 +1,7 @@
 import { validate } from "@/middlewares/validate.middleware";
 import { createResponse } from "@/utils/create_response";
 import { getErrorMessage } from "@/utils/get_error_message";
-import jwt from "jsonwebtoken";
+import * as jose from "jose";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
@@ -16,7 +16,10 @@ export async function POST(req: Request): Promise<NextResponse> {
 		if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
 			const expiredAfter = 7 * 24 * 60 * 60 * 1000;
 
-			const token = jwt.sign({ username }, JWT_SECRET, { expiresIn: expiredAfter });
+			const token = await new jose.SignJWT({ username })
+				.setExpirationTime(Date.now() + expiredAfter)
+				.setProtectedHeader({ alg: "HS256" })
+				.sign(new TextEncoder().encode(JWT_SECRET));
 
 			cookies().set("authorization", token, {
 				expires: rememberMe ? Date.now() + expiredAfter : undefined
