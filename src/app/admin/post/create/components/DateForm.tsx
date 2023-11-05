@@ -1,7 +1,8 @@
 import { Checkbox, FormControlLabel, Typography } from "@mui/material";
 import { LocalizationProvider, MobileDatePicker } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { Dayjs } from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
+import "dayjs/locale/pl";
 import React, { Dispatch, SetStateAction, useState } from "react";
 
 type Props = {
@@ -20,12 +21,13 @@ export default function DateForm({
 	const [isEndDateEnable, setIsEndDateEnable] = useState<boolean>(false);
 
 	return (
-		<LocalizationProvider dateAdapter={AdapterDayjs}>
+		<LocalizationProvider adapterLocale="pl" dateAdapter={AdapterDayjs}>
 			<Typography mt={2} textAlign="center" variant="h4">
 				Data
 			</Typography>
 			<MobileDatePicker
 				defaultValue={startDate}
+				minDate={dayjs()}
 				onChange={(newValue): void => {
 					newValue && setStartDate(newValue);
 				}}
