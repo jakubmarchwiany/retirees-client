@@ -15,7 +15,7 @@ export default function AdminButtons(): JSX.Element {
 		<Stack alignItems="center" direction="row">
 			<MyLinkButton
 				href="/admin/post/create"
-				isActive={path === "/login"}
+				isActive={path === "/admin/post/create"}
 				props={{ startIcon: <PostAdd /> }}
 				text={isPhone ? "" : "Dodaj"}
 			/>
