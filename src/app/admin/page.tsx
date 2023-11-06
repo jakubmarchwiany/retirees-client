@@ -1,7 +1,9 @@
 import Post from "@/app/components/post/Post";
 import PostsPagination from "@/app/components/post/PostsPagination";
 import { PostType } from "@/types/post.type";
-import { Stack } from "@mui/material";
+import { Box, Stack } from "@mui/material";
+
+import EditButton from "../components/post/EditButton";
 
 const { GOOGLE_BUCKET_IMAGES_URL } = process.env;
 
@@ -42,7 +44,19 @@ export default async function HomePage({
 
 	const generatePosts = (): JSX.Element[] => {
 		return posts.map((item) => {
-			return <Post key={item.id} {...item} />;
+			return (
+				<Box
+					justifyContent="center"
+					key={"box_post_" + item.id}
+					position="relative"
+					sx={{ display: "flex" }}
+					width={"100%"}
+				>
+					<Post key={item.id} {...item} />
+
+					<EditButton href={`/admin/post/${item.id}/edit`} />
+				</Box>
+			);
 		});
 	};
 
