@@ -1,8 +1,11 @@
 import { PostType } from "@/types/post.type";
+import { Stack } from "@mui/material";
+
+import EditPost from "./components/EditPost";
 
 const { GOOGLE_BUCKET_IMAGES_URL } = process.env;
 
-async function getData(postId: string): Promise<{ post: PostType | undefined }> {
+async function getData(postId: string): Promise<PostType | undefined> {
 	const dataFetch = await fetch(
 		"https://storage.googleapis.com/retirees-chelm.appspot.com/development/posts_data.json"
 	);
@@ -15,11 +18,11 @@ async function getData(postId: string): Promise<{ post: PostType | undefined }> 
 		post.image = GOOGLE_BUCKET_IMAGES_URL + post.image;
 	}
 
-	return { post };
+	return post;
 }
 
 export default async function Page({ params }: { params: { id: string } }): Promise<JSX.Element> {
-	const data = await getData(params.id);
+	const postToEdit = await getData(params.id);
 
-	return <>siema</>;
+	return <Stack>{postToEdit !== undefined && <EditPost {...postToEdit} />}</Stack>;
 }
