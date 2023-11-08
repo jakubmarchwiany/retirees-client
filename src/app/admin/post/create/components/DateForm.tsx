@@ -3,7 +3,7 @@ import { LocalizationProvider, MobileDatePicker } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs, { Dayjs } from "dayjs";
 import "dayjs/locale/pl";
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 type Props = {
 	startDate: Dayjs | undefined;
@@ -19,6 +19,12 @@ export default function DateForm({
 	setEndDate
 }: Props): JSX.Element {
 	const [isEndDateEnable, setIsEndDateEnable] = useState<boolean>(false);
+
+	useEffect(() => {
+		if (endDate !== undefined) {
+			setIsEndDateEnable(true);
+		}
+	}, []);
 
 	return (
 		<LocalizationProvider adapterLocale="pl" dateAdapter={AdapterDayjs}>
