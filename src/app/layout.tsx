@@ -14,13 +14,13 @@ export default function RootLayout({ children }: { children: JSX.Element }): JSX
 						className="background"
 						display="flex"
 						flexDirection="column"
-						minHeight={"100vh"}
+						minHeight="100vh"
 					>
 						<Navbar />
 						<ToastProvider />
 						<Box
 							color="primary.contrastText"
-							component={"main"}
+							component="main"
 							flex={1}
 							overflow="auto"
 							py={{ xs: 1, sm: 2, lg: 3 }}

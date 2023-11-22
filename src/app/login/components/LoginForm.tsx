@@ -42,7 +42,7 @@ export function LoginForm(): JSX.Element {
 	};
 
 	return (
-		<Stack component={"form"} mt={2} onSubmit={handleLogin}>
+		<Stack component="form" mt={2} onSubmit={handleLogin}>
 			<TextField
 				label="Nazwa użytkownika"
 				onChange={(event: React.ChangeEvent<HTMLInputElement>): void => {

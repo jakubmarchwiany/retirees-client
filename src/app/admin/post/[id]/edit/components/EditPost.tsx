@@ -70,7 +70,7 @@ export default function EditPost({
 				<TextField
 					autoFocus={true}
 					color="secondary"
-					label={"Tytuł Posta"}
+					label="Tytuł Posta"
 					onChange={(e): void => {
 						setTitle(e.target.value);
 					}}

@@ -14,13 +14,13 @@ export default function UserButton(): JSX.Element {
 	return (
 		<Stack alignItems="center" direction="row">
 			<MyLinkButton
-				href={""}
+				href=""
 				isActive={path === ""}
 				props={{ startIcon: <Info /> }}
 				text={isPhone ? "" : "Informacje"}
 			/>
 			<MyLinkButton
-				href={"/contact"}
+				href="/contact"
 				isActive={path === "/contact"}
 				props={{ startIcon: <ContactMail /> }}
 				text={isPhone ? "" : "Kontakt"}

@@ -50,7 +50,7 @@ export default async function HomePage({
 					key={"box_post_" + item.id}
 					position="relative"
 					sx={{ display: "flex" }}
-					width={"100%"}
+					width="100%"
 				>
 					<Post key={item.id} {...item} />
 

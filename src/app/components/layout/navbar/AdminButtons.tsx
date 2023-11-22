@@ -20,7 +20,7 @@ export default function AdminButtons(): JSX.Element {
 				text={isPhone ? "" : "Dodaj"}
 			/>
 			<MyLinkButton
-				href={"/admin"}
+				href="/admin"
 				isActive={path === "/admin"}
 				props={{ startIcon: <Edit /> }}
 				text={isPhone ? "" : "edycja"}

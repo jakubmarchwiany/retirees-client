@@ -24,7 +24,7 @@ export default function ImageLoader({ selectedImage, setImage }: Props): JSX.Ele
 	};
 
 	return (
-		<Stack direction={"row"} mt={2}>
+		<Stack direction="row" mt={2}>
 			<Button component="label" variant="contained">
 				{selectedImage !== undefined ? "Zmień zdjęcie" : "Dodaj zdjęcie (opcjonalne)"}
 				<input accept="image/*" hidden onChange={handleImageUpload} type="file" />

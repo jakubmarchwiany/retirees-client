@@ -20,7 +20,7 @@ export default function Loading(): JSX.Element {
 										animation="wave"
 										height={32}
 										variant="rounded"
-										width={"20%"}
+										width="20%"
 									/>
 								}
 								title={
@@ -29,7 +29,7 @@ export default function Loading(): JSX.Element {
 										height={40}
 										sx={{ mb: 1 }}
 										variant="rounded"
-										width={"40%"}
+										width="40%"
 									/>
 								}
 							/>
@@ -40,7 +40,7 @@ export default function Loading(): JSX.Element {
 								height={150}
 								sx={{ my: 2, ml: "5%" }}
 								variant="rounded"
-								width={"90%"}
+								width="90%"
 							/>
 						</Card>
 					))}

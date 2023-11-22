@@ -13,7 +13,7 @@ export default function LoginPage(): JSX.Element {
 				alignItems: "center"
 			}}
 		>
-			<Stack alignItems={"center"}>
+			<Stack alignItems="center">
 				<Avatar
 					sx={{
 						bgcolor: "primary.main",

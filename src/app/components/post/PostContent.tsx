@@ -25,7 +25,7 @@ export default function PostContent({ content }: Props): JSX.Element {
 			</Collapse>
 			<Stack
 				component={Button}
-				direction={"row"}
+				direction="row"
 				fullWidth
 				justifyContent="center"
 				onClick={handleExpandClick}
@@ -38,7 +38,7 @@ export default function PostContent({ content }: Props): JSX.Element {
 				>
 					<ExpandMore />
 				</ExpandMoreIcon>
-				<Typography alignContent={"center"} variant="h6">
+				<Typography alignContent="center" variant="h6">
 					{isExpand ? "Ukryj informacje" : "Pokaż informacje"}
 				</Typography>
 				<ExpandMoreIcon

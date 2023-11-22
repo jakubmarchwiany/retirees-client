@@ -208,7 +208,8 @@ module.exports = {
 				allowModules: ["cropperjs"],
 				resolvePaths: []
 			}
-		]
+		],
+		"react/jsx-curly-brace-presence": "error"
 	},
 	settings: {
 		react: {

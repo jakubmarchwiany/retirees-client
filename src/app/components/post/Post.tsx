@@ -35,7 +35,7 @@ export default function Post({ title, startDate, endDate, image, content }: Post
 			<CardHeader
 				subheader={
 					<Typography
-						alignContent={"center"}
+						alignContent="center"
 						sx={{ typography: { xs: "caption", sm: "h6" } }}
 					>
 						{subheader(startDate, endDate)}

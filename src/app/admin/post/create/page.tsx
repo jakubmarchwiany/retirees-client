@@ -80,7 +80,7 @@ export default function NewPostPage(): JSX.Element {
 				<TextField
 					autoFocus={true}
 					color="secondary"
-					label={"Tytuł Posta"}
+					label="Tytuł Posta"
 					onChange={(e): void => {
 						setTitle(e.target.value);
 					}}
@@ -103,7 +103,7 @@ export default function NewPostPage(): JSX.Element {
 			<Post
 				content={content}
 				endDate={endDate && endDate.toString()}
-				id={"1"}
+				id="1"
 				image={cropImage}
 				startDate={startDate !== undefined ? startDate.toString() : "Brak daty"}
 				title={title}

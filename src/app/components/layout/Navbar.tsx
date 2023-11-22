@@ -29,7 +29,7 @@ export default function Navbar(): JSX.Element {
 						}}
 						variant="h6"
 					>
-						{"Chełmscy Emeryci SW"}
+						Chełmscy Emeryci SW
 					</Typography>
 				</Stack>
 

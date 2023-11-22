@@ -30,8 +30,8 @@ export default function ImageEditor({ selectedImage, saveCropImage }: Props): JS
 			}}
 		>
 			<Stack
-				bgcolor={"background.paper"}
-				color={"text.primary"}
+				bgcolor="background.paper"
+				color="text.primary"
 				sx={{
 					position: "absolute" as const,
 					top: "5%",
