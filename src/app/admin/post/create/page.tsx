@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
@@ -10,7 +9,7 @@ import TextEditor from "@/app/admin/post/create/components/TextEditor";
 import { postValidation } from "@/app/admin/post/create/components/post.validation";
 import Post from "@/app/components/post/Post";
 import { dataURLtoFile } from "@/app/components/utils/dataURLToFile";
-import { formDataFetch } from "@/app/components/utils/fetches";
+import { myFetch } from "@/app/components/utils/myFetch";
 import { sleep } from "@/app/components/utils/sleep";
 import { LoadingButton } from "@mui/lab";
 import { Stack, TextField, Typography } from "@mui/material";
@@ -53,7 +52,12 @@ export default function NewPostPage(): JSX.Element {
 
 			setIsLoading(true);
 
-			formDataFetch(formData, "/admin/posts/-/create", { customError: true })
+			myFetch("/admin/posts/-/create", {
+				method: "POST",
+				body: formData,
+				headers: undefined,
+				customError: true
+			})
 				.then(async () => {
 					await sleep(500);
 

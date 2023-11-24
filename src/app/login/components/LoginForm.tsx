@@ -1,6 +1,6 @@
 "use client";
 
-import { postFetch } from "@/app/components/utils/fetches";
+import { myFetch } from "@/app/components/utils/myFetch";
 import { sleep } from "@/app/components/utils/sleep";
 import { LoadingButton } from "@mui/lab";
 import { Checkbox, FormControlLabel, Stack, TextField } from "@mui/material";
@@ -30,7 +30,11 @@ export function LoginForm(): JSX.Element {
 
 		setLoading(true);
 
-		postFetch({ username, password, rememberMe }, `/auth/login`, { customError: true })
+		myFetch(`/auth/login`, {
+			method: "POST",
+			body: JSON.stringify({ username, password, rememberMe }),
+			customError: true
+		})
 			.then(async () => {
 				await sleep(500);
 

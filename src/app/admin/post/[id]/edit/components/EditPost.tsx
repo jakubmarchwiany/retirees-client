@@ -1,7 +1,7 @@
 "use client";
 
 import Post from "@/app/components/post/Post";
-import { myFetch } from "@/app/components/utils/fetches";
+import { myFetch } from "@/app/components/utils/myFetch";
 import { sleep } from "@/app/components/utils/sleep";
 import { PostType } from "@/types/post.type";
 import { LoadingButton } from "@mui/lab";
@@ -40,7 +40,8 @@ export default function EditPost({
 		if (postValidation(title, startDate, content)) {
 			setIsLoading(true);
 
-			myFetch(`/admin/posts/${initId}`, "PATCH", {
+			myFetch(`/admin/posts/${initId}`, {
+				method: "PATCH",
 				body: JSON.stringify({ title, startDate, endDate, content }),
 				customError: true
 			})
