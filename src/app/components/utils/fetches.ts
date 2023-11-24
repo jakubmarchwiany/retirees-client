@@ -2,10 +2,11 @@ import toast from "react-hot-toast";
 
 import { authorizationFail } from "./log_out";
 
-const NEXT_PUBLIC_API_ENDPOINT = process.env.NEXT_PUBLIC_API_ENDPOINT;
 const NODE_ENV = process.env.NODE_ENV;
 
 type FetchMethod = "DELETE" | "GET" | "PATCH" | "POST" | "PUT";
+
+const API_ENDPOINT = window.location.origin + "/api";
 
 export async function myFetch<T>(
 	url: string,
@@ -23,7 +24,7 @@ export async function myFetch<T>(
 			"Content-Type": "application/json"
 		};
 
-		fetch(NEXT_PUBLIC_API_ENDPOINT + url, {
+		fetch(API_ENDPOINT + url, {
 			method,
 			credentials: "include",
 			headers,
@@ -67,7 +68,7 @@ export async function getFetch<T>(
 	return await new Promise((resolve, reject) => {
 		const toastId = toast.loading("Ładowanie...");
 
-		fetch(NEXT_PUBLIC_API_ENDPOINT + url, {
+		fetch(API_ENDPOINT + url, {
 			method: "",
 			credentials: "include",
 			headers: {
@@ -113,7 +114,7 @@ export async function postFetch<T>(
 	return await new Promise((resolve, reject) => {
 		const toastId = toast.loading("Ładowanie...");
 
-		fetch(NEXT_PUBLIC_API_ENDPOINT + url, {
+		fetch(API_ENDPOINT + url, {
 			method: "POST",
 			credentials: "include",
 			headers: {
@@ -162,7 +163,7 @@ export async function formDataFetch<T>(
 	return await new Promise((resolve, reject) => {
 		const toastId = toast.loading("Ładowanie...");
 
-		fetch(NEXT_PUBLIC_API_ENDPOINT + url, {
+		fetch(API_ENDPOINT + url, {
 			method: "POST",
 			credentials: "include",
 			body: formData

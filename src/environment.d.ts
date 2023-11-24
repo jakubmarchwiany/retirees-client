@@ -8,6 +8,5 @@ namespace NodeJS {
 		GOOGLE_KEY_FILE_NAME: string;
 		GOOGLE_PROJECT_ID: string;
 		JWT_SECRET: string;
-		NEXT_PUBLIC_API_ENDPOINT: string;
 	}
 }
