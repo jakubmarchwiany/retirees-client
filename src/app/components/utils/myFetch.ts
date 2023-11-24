@@ -6,8 +6,6 @@ const NODE_ENV = process.env.NODE_ENV;
 
 type FetchMethod = "DELETE" | "GET" | "PATCH" | "POST" | "PUT";
 
-const API_ENDPOINT = window.location.origin + "/api";
-
 export async function myFetch<T>(
 	url: string,
 	options: {
@@ -20,7 +18,7 @@ export async function myFetch<T>(
 	return await new Promise((resolve, reject) => {
 		const toastId = toast.loading("Ładowanie...");
 
-		fetch(API_ENDPOINT + url, {
+		fetch(window.location.origin + "/api" + url, {
 			method: options.method,
 			credentials: "include",
 			headers: options.headers,
