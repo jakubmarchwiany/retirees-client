@@ -33,7 +33,6 @@ export default function DateForm({
 			</Typography>
 			<MobileDatePicker
 				defaultValue={startDate}
-				minDate={dayjs()}
 				onChange={(newValue): void => {
 					newValue && setStartDate(newValue);
 				}}
