@@ -59,7 +59,7 @@ export default function NewPostPage(): JSX.Element {
 				customError: true
 			})
 				.then(async () => {
-					await sleep(500);
+					await sleep(2000);
 
 					router.push("/admin");
 				})

@@ -46,7 +46,7 @@ export default function EditPost({
 				customError: true
 			})
 				.then(async () => {
-					await sleep(500);
+					await sleep(2000);
 
 					router.push("/admin");
 				})
