@@ -1,4 +1,4 @@
-import { db } from "@/app/api/db/firebase";
+import { addPrefix, db } from "@/app/api/db/firebase";
 import { validateObject } from "@/app/api/middlewares/validate_object";
 import { createResponse } from "@/app/api/utils/create_response";
 import { uploadPostImageToBucket } from "@/app/api/utils/google_bucket.api";
@@ -24,7 +24,14 @@ export async function POST(req: Request): Promise<NextResponse> {
 			createPostDataSchema
 		);
 
-		let newPost;
+		const newPost = {
+			title,
+			startDate: new Date(startDate),
+			endDate: endDate !== null ? new Date(endDate) : null,
+			content,
+			image: null as unknown as string,
+			createdDate: new Date()
+		};
 
 		if (formData.has("file")) {
 			const file = formData.get("file") as File;
@@ -35,12 +42,10 @@ export async function POST(req: Request): Promise<NextResponse> {
 
 			const image = await uploadPostImageToBucket(buffer);
 
-			newPost = { title, startDate, endDate, image, content };
-		} else {
-			newPost = { title, startDate, endDate, content, image: null };
+			newPost.image = image;
 		}
 
-		await addDoc(collection(db, "posts"), newPost);
+		await addDoc(collection(db, addPrefix("posts")), newPost);
 
 		revalidateTag("posts_update");
 
