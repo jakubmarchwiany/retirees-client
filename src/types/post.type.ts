@@ -5,4 +5,5 @@ export type PostType = {
 	endDate: null | string;
 	image: null | string;
 	content: string;
+	createdDate: string;
 };
