@@ -3,6 +3,7 @@ import PostsPagination from "@/app/components/post/PostsPagination";
 import { PostType } from "@/types/post.type";
 import { Box, Stack } from "@mui/material";
 
+import DeleteButton from "../components/post/DeleteButton";
 import EditButton from "../components/post/EditButton";
 
 const { GOOGLE_BUCKET_IMAGES_URL } = process.env;
@@ -54,7 +55,8 @@ export default async function HomePage({
 				>
 					<Post key={item.id} {...item} />
 
-					<EditButton href={`/admin/post/${item.id}/edit`} />
+					<EditButton id={item.id} />
+					<DeleteButton id={item.id} />
 				</Box>
 			);
 		});

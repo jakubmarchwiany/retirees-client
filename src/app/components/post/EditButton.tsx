@@ -3,27 +3,28 @@ import { IconButton } from "@mui/material";
 import Link from "next/link";
 
 type Props = {
-	href: string;
+	id: string;
 };
 
-export default function EditButton({ href }: Props): JSX.Element {
+export default function EditButton({ id }: Props): JSX.Element {
 	return (
-		<IconButton
-			sx={{
-				position: "absolute",
-				top: "5px",
-				right: {
-					xs: "4%",
-					sm: "11%",
-					md: "16%",
-					lg: "21%",
-					xl: "25.5%"
-				}
-			}}
-		>
-			<Link href={href} passHref style={{ textDecoration: "none" }}>
-				<Edit color="primary" fontSize="medium" />
-			</Link>
-		</IconButton>
+		<Link href={`/admin/post/${id}/edit`} passHref style={{ textDecoration: "none" }}>
+			<IconButton
+				size="small"
+				sx={{
+					position: "absolute",
+					top: "5px",
+					right: {
+						xs: "4%",
+						sm: "11%",
+						md: "16%",
+						lg: "21%",
+						xl: "25.5%"
+					}
+				}}
+			>
+				<Edit color="primary" fontSize="large" />
+			</IconButton>
+		</Link>
 	);
 }
