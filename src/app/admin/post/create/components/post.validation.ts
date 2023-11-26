@@ -1,11 +1,7 @@
 import { Dayjs } from "dayjs";
 import toast from "react-hot-toast";
 
-export function postValidation(
-	title: string,
-	startDate: Dayjs | undefined,
-	content: string
-): boolean {
+export function postValidation(title: string, startDate: Dayjs | null, content: string): boolean {
 	if (title === "") {
 		toast.error("Musisz wprowadzić tytuł posta");
 
@@ -21,7 +17,7 @@ export function postValidation(
 
 		return false;
 	}
-	if (startDate === undefined) {
+	if (startDate === null) {
 		toast.error("Musisz wybrać datę");
 
 		return false;

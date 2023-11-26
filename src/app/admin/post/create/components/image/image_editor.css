@@ -1,7 +1,7 @@
 /* Make sure the size of the image fits perfectly into the container */
 #image_cropper {
-  display: block;
+	display: block;
 
-  /* This rule is very important, please don't ignore this */
-  max-width: 100%;
+	/* This rule is very important, please don't ignore this */
+	max-width: 100%;
 }
