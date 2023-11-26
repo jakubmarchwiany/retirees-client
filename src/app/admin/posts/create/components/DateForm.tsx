@@ -1,15 +1,15 @@
 import { Checkbox, FormControlLabel, Typography } from "@mui/material";
 import { LocalizationProvider, MobileDatePicker } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import dayjs, { Dayjs } from "dayjs";
+import { Dayjs } from "dayjs";
 import "dayjs/locale/pl";
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 type Props = {
-	startDate: Dayjs | undefined;
-	setStartDate: Dispatch<SetStateAction<Dayjs | undefined>>;
-	endDate: Dayjs | undefined;
-	setEndDate: Dispatch<SetStateAction<Dayjs | undefined>>;
+	startDate: Dayjs | null;
+	setStartDate: Dispatch<SetStateAction<Dayjs | null>>;
+	endDate: Dayjs | null;
+	setEndDate: Dispatch<SetStateAction<Dayjs | null>>;
 };
 
 export default function DateForm({
@@ -21,7 +21,7 @@ export default function DateForm({
 	const [isEndDateEnable, setIsEndDateEnable] = useState<boolean>(false);
 
 	useEffect(() => {
-		if (endDate !== undefined) {
+		if (endDate !== null) {
 			setIsEndDateEnable(true);
 		}
 	}, []);
@@ -46,7 +46,7 @@ export default function DateForm({
 							setIsEndDateEnable(event.target.checked);
 
 							if (!event.target.checked) {
-								setEndDate(undefined);
+								setEndDate(null);
 							}
 						}}
 					/>

@@ -29,6 +29,11 @@ yarn-error.log*
 .env.test
 .env*.local
 key_google_bucket.json
+firebase_config.json
+
+# cache
+.cspellcache
+.eslintcache
 
 
 # vercel

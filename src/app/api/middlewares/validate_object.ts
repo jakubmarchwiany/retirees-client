@@ -12,7 +12,13 @@ function validateObject<T>(object: unknown, schema: Schema): T {
 	} else {
 		const errors = validate.errors as DefinedError[];
 
-		const errorMessage = "Validation failed. Errors: " + errors[0].message;
+		let errorMessage;
+
+		if (errors[0] !== undefined) {
+			errorMessage = "Validation failed. Errors: " + errors[0].message;
+		} else {
+			errorMessage = "Validation failed";
+		}
 
 		throw new Error(errorMessage);
 	}

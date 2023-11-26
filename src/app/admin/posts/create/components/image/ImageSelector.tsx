@@ -6,41 +6,39 @@ import ImageEditor from "./ImageEditor";
 import ImageLoader from "./ImageLoader";
 
 type Props = {
-	setCropImage: Dispatch<SetStateAction<string | undefined>>;
+	setCropImage: Dispatch<SetStateAction<null | string>>;
 };
 
 export function ImageSelector({ setCropImage }: Props): JSX.Element {
-	const [selectedImage, setSelectedImage] = useState<ArrayBuffer | string | undefined>(undefined);
+	const [selectedImage, setSelectedImage] = useState<ArrayBuffer | null | string>(null);
 
 	const [isImageEditorOpen, setIsImageEditorOpen] = useState(false);
 
 	const setSelectedImageAndOpenImageEditor = (
-		selectedImage: ArrayBuffer | string | undefined
+		selectedImage: ArrayBuffer | null | string
 	): void => {
 		setSelectedImage(selectedImage);
 
-		setCropImage(undefined);
+		setCropImage(null);
 
-		if (selectedImage !== undefined) {
+		if (selectedImage !== null) {
 			setIsImageEditorOpen(true);
 		}
 	};
 
-	const saveCropImageAndCloseImageEditor = (cropImage: string | undefined): void => {
+	const saveCropImageAndCloseImageEditor = (cropImage: null | string): void => {
 		setCropImage(cropImage);
 
 		setIsImageEditorOpen(false);
 	};
 
-	const convertArrayBufferToString = (): string | undefined => {
+	const convertArrayBufferToString = (selectedImage: ArrayBuffer | string): string => {
 		const textDecoder = new TextDecoder("utf-8");
 
-		if (selectedImage !== undefined) {
-			if (selectedImage instanceof ArrayBuffer) {
-				return textDecoder.decode(selectedImage);
-			} else {
-				return selectedImage;
-			}
+		if (selectedImage instanceof ArrayBuffer) {
+			return textDecoder.decode(selectedImage);
+		} else {
+			return selectedImage;
 		}
 	};
 
@@ -55,10 +53,10 @@ export function ImageSelector({ setCropImage }: Props): JSX.Element {
 				setImage={setSelectedImageAndOpenImageEditor}
 			/>
 
-			{isImageEditorOpen && (
+			{isImageEditorOpen && selectedImage !== null && (
 				<ImageEditor
 					saveCropImage={saveCropImageAndCloseImageEditor}
-					selectedImage={convertArrayBufferToString()}
+					selectedImage={convertArrayBufferToString(selectedImage)}
 				/>
 			)}
 		</>

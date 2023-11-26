@@ -12,8 +12,8 @@ dayjs.extend(relativeTime);
 
 dayjs.locale("pl");
 
-const subheader = (startDate: string, endDate: string | undefined): string => {
-	if (endDate !== undefined) {
+const subheader = (startDate: string, endDate: null | string): string => {
+	if (endDate !== null) {
 		return `Data od [ ${dayjs(startDate).format("DD.MM.YYYY")} ] do [ ${dayjs(endDate).format(
 			"DD.MM.YYYY"
 		)} ] `;
@@ -49,7 +49,7 @@ export default function Post({ title, startDate, endDate, image, content }: Post
 			/>
 			<Divider />
 
-			{image !== undefined && (
+			{image !== null && (
 				<>
 					<CardMedia
 						component="img"

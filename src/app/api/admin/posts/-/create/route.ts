@@ -1,59 +1,58 @@
+import { addPrefix, db } from "@/app/api/db/firebase";
 import { validateObject } from "@/app/api/middlewares/validate_object";
 import { createResponse } from "@/app/api/utils/create_response";
-import {
-	downloadPostsFromBucket,
-	savePostsToBucket,
-	uploadPostImageToBucket
-} from "@/app/api/utils/google_bucket.api";
-import { PostType } from "@/types/post.type";
+import { uploadPostImageToBucket } from "@/app/api/utils/google_bucket.api";
+import { addDoc, collection } from "firebase/firestore";
 import { revalidateTag } from "next/cache";
 import { NextResponse } from "next/server";
-import { v4 as uuidv4 } from "uuid";
 
 import { CreatePostData, createPostDataSchema } from "./create_post.schema";
 
 export async function POST(req: Request): Promise<NextResponse> {
 	try {
-		const data = await req.formData();
+		const formData = await req.formData();
 
-		const file = data.get("file") as File | null;
-
-		const dataToCheck = {
-			title: data.get("title"),
-			startDate: data.get("startDate"),
-			endDate: data.get("endDate") === null ? undefined : data.get("endDate"),
-			content: data.get("content")
+		const postToCheck = {
+			title: formData.get("title"),
+			startDate: formData.get("startDate"),
+			endDate: formData.get("endDate"),
+			content: formData.get("content")
 		};
 
-		const { title, startDate, endDate, content } = validateObject<CreatePostData>(
-			dataToCheck,
+		const { content, endDate, startDate, title } = validateObject<CreatePostData>(
+			postToCheck,
 			createPostDataSchema
 		);
 
-		const postsData = await downloadPostsFromBucket();
+		const newPost = {
+			title,
+			startDate: new Date(startDate),
+			endDate: endDate !== null ? new Date(endDate) : null,
+			content,
+			image: null as unknown as string,
+			createdDate: new Date()
+		};
 
-		let newPost: PostType;
+		if (formData.has("file")) {
+			const file = formData.get("file") as File;
 
-		if (file !== null) {
 			const bytes = await file.arrayBuffer();
 
 			const buffer = Buffer.from(bytes);
 
 			const image = await uploadPostImageToBucket(buffer);
 
-			newPost = { id: uuidv4(), title, startDate, endDate, image, content };
-		} else {
-			newPost = { id: uuidv4(), title, startDate, endDate, content };
+			newPost.image = image;
 		}
 
-		postsData.unshift(newPost);
-
-		await savePostsToBucket(postsData);
+		await addDoc(collection(db, addPrefix("posts")), newPost);
 
 		revalidateTag("posts_update");
 
 		return createResponse(200, "Udało się dodać post");
 	} catch (error) {
+		console.log(error);
+
 		return createResponse(400, "Nie udało się dodać posta");
 	}
 }

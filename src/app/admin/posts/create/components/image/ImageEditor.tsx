@@ -7,8 +7,8 @@ import { Cropper, ReactCropperElement } from "react-cropper";
 import "./image_editor.css";
 
 type Props = {
-	selectedImage: string | undefined;
-	saveCropImage: (cropImage: string | undefined) => void;
+	selectedImage: string;
+	saveCropImage: (cropImage: null | string) => void;
 };
 
 export default function ImageEditor({ selectedImage, saveCropImage }: Props): JSX.Element {
@@ -16,7 +16,7 @@ export default function ImageEditor({ selectedImage, saveCropImage }: Props): JS
 	const [cropImage, setCropImage] = useState<null | string>(null);
 
 	const getCropData = (): void => {
-		if (typeof cropperRef.current?.cropper !== "undefined") {
+		if (cropperRef.current?.cropper) {
 			setCropImage(cropperRef.current?.cropper.getCroppedCanvas().toDataURL());
 		}
 	};
@@ -43,7 +43,7 @@ export default function ImageEditor({ selectedImage, saveCropImage }: Props): JS
 				<Button
 					color="warning"
 					onClick={(): void => {
-						saveCropImage(undefined);
+						saveCropImage(null);
 					}}
 					sx={{ borderRadius: 0 }}
 					variant="contained"
