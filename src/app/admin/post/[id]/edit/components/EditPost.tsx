@@ -2,13 +2,12 @@
 
 import Post from "@/app/components/post/Post";
 import { myFetch } from "@/app/components/utils/myFetch";
-import { sleep } from "@/app/components/utils/sleep";
 import { PostType } from "@/types/post.type";
 import { LoadingButton } from "@mui/lab";
 import { Stack, TextField, Typography } from "@mui/material";
 import dayjs, { Dayjs } from "dayjs";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useTransition } from "react";
 
 import DateForm from "../../../create/components/DateForm";
 import TextEditor from "../../../create/components/TextEditor";
@@ -20,19 +19,23 @@ export default function EditPost({
 	startDate: initStartDate,
 	endDate: initEndDate,
 	image: initImage,
-	content: initContent
+	content: initContent,
+	createdDate: initCreatedDate
 }: PostType): JSX.Element {
 	const [title, setTitle] = useState<string>(initTitle);
-	const [startDate, setStartDate] = useState<Dayjs | undefined>(dayjs(initStartDate));
-	const [endDate, setEndDate] = useState<Dayjs | undefined>(() => {
-		if (initEndDate !== undefined) {
+	const [startDate, setStartDate] = useState<Dayjs | null>(dayjs(initStartDate));
+	const [endDate, setEndDate] = useState<Dayjs | null>(() => {
+		if (initEndDate !== null) {
 			return dayjs(initEndDate);
+		} else {
+			return null;
 		}
 	});
-	const [cropImage, setCropImage] = useState<string | undefined>(initImage);
+	const [cropImage, setCropImage] = useState<null | string>(initImage);
 	const [content, setContent] = useState<string>(initContent);
-
 	const [isLoading, setIsLoading] = useState<boolean>(false);
+
+	const [isPending, startTransition] = useTransition();
 
 	const router = useRouter();
 
@@ -45,10 +48,12 @@ export default function EditPost({
 				body: JSON.stringify({ title, startDate, endDate, content }),
 				customError: true
 			})
-				.then(async () => {
-					await sleep(2000);
-
+				.then(() => {
 					router.push("/admin");
+
+					startTransition(() => router.push("/admin"));
+
+					startTransition(() => router.refresh());
 				})
 				.catch(() => {
 					setIsLoading(false);
@@ -91,10 +96,11 @@ export default function EditPost({
 
 			<Post
 				content={content}
+				createdDate={initCreatedDate}
 				endDate={endDate && endDate.toString()}
 				id={initId}
 				image={cropImage}
-				startDate={startDate !== undefined ? startDate.toString() : "Brak daty"}
+				startDate={startDate !== null ? startDate.toString() : "Brak daty"}
 				title={title}
 			/>
 
