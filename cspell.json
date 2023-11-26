@@ -18,6 +18,7 @@
 		"uuidv"
 	],
 	"ignorePaths": [
+		"firebase_config.json",
 		"key_google_bucket.json",
 		"node_modules",
 		"build",
