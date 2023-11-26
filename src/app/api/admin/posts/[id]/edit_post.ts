@@ -1,7 +1,7 @@
+import { addPrefix, db } from "@/app/api/db/firebase";
 import { validate } from "@/app/api/middlewares/validate.middleware";
 import { createResponse } from "@/app/api/utils/create_response";
-import { downloadPostsFromBucket, savePostsToBucket } from "@/app/api/utils/google_bucket.api";
-import { PostType } from "@/types/post.type";
+import { doc, updateDoc } from "firebase/firestore";
 import { revalidateTag } from "next/cache";
 import { NextResponse } from "next/server";
 
@@ -19,33 +19,23 @@ export async function EditPost(
 			createPostDataSchema
 		);
 
-		const postsData = await downloadPostsFromBucket();
+		const postToUpdate = doc(db, addPrefix("posts"), id);
 
-		const postToUpdateIndex = postsData.findIndex((p) => p.id == id);
+		const updatedPost = {
+			title,
+			startDate: new Date(startDate),
+			content,
+			endDate: endDate !== null ? new Date(endDate) : null
+		};
 
-		if (postToUpdateIndex !== 1) {
-			const updatePost: PostType = {
-				id,
-				title,
-				startDate,
-				content,
-				...(endDate !== undefined && { endDate }),
-				...(postsData[postToUpdateIndex]?.image !== undefined && {
-					image: postsData[postToUpdateIndex]?.image
-				})
-			};
+		await updateDoc(postToUpdate, updatedPost);
 
-			postsData[postToUpdateIndex] = updatePost;
+		revalidateTag("posts_update");
 
-			await savePostsToBucket(postsData);
-
-			revalidateTag("posts_update");
-
-			return createResponse(200, "Udało się edytować post");
-		} else {
-			throw Error("Post który chcesz edytować nie istnieje");
-		}
+		return createResponse(200, "Udało się edytować post");
 	} catch (error) {
+		console.log(error);
+
 		return createResponse(400, "Nie udało się edytować postu");
 	}
 }
