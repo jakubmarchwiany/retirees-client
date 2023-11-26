@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 
 import { sleep } from "../components/utils/sleep";
 
-export async function GET(): Promise<NextResponse> {
+export async function GET(): Promise<any> {
 	try {
 		await sleep(500);
 

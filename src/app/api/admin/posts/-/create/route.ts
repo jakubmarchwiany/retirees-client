@@ -1,6 +1,5 @@
 import { addPrefix, db } from "@/app/api/db/firebase";
 import { validateObject } from "@/app/api/middlewares/validate_object";
-import { createResponse } from "@/app/api/utils/create_response";
 import { uploadPostImageToBucket } from "@/app/api/utils/google_bucket.api";
 import { addDoc, collection } from "firebase/firestore";
 import { revalidateTag } from "next/cache";
@@ -8,7 +7,7 @@ import { NextResponse } from "next/server";
 
 import { CreatePostData, createPostDataSchema } from "./create_post.schema";
 
-export async function POST(req: Request): Promise<NextResponse> {
+export async function POST(req: Request): Promise<any> {
 	try {
 		const formData = await req.formData();
 
@@ -49,10 +48,21 @@ export async function POST(req: Request): Promise<NextResponse> {
 
 		revalidateTag("posts_update");
 
-		return createResponse(200, "Udało się dodać post");
+		return NextResponse.json(
+			{ message: "Udało się dodać post" },
+			{
+				status: 200
+			}
+		);
+		// return createResponse(200, "Udało się dodać post");
 	} catch (error) {
 		console.log(error);
 
-		return createResponse(400, "Nie udało się dodać posta");
+		return NextResponse.json(
+			{ message: "Nie udało się dodać posta" },
+			{
+				status: 400
+			}
+		);
 	}
 }

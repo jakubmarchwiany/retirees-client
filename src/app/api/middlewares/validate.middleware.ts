@@ -13,7 +13,11 @@ async function validate<T>(req: Request, schema: Schema): Promise<T> {
 	} else {
 		const errors = validate.errors as DefinedError[];
 
-		const errorMessage = "Validation failed. Errors: " + errors[0].message;
+		let errorMessage = "Validation error";
+
+		if (errors[0] !== undefined) {
+			errorMessage = "Validation failed. Errors: " + errors[0].message;
+		}
 
 		throw new Error(errorMessage);
 	}

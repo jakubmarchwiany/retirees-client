@@ -3,14 +3,10 @@ import { validate } from "@/app/api/middlewares/validate.middleware";
 import { createResponse } from "@/app/api/utils/create_response";
 import { doc, updateDoc } from "firebase/firestore";
 import { revalidateTag } from "next/cache";
-import { NextResponse } from "next/server";
 
 import { CreatePostData, createPostDataSchema } from "../-/create/create_post.schema";
 
-export async function EditPost(
-	req: Request,
-	{ params }: { params: { id: string } }
-): Promise<NextResponse> {
+export async function EditPost(req: Request, { params }: { params: { id: string } }): Promise<any> {
 	try {
 		const { id } = params;
 

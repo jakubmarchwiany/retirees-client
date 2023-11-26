@@ -15,7 +15,13 @@ export default function ImageLoader({ selectedImage, setImage }: Props): JSX.Ele
 
 			reader.onload = (e): void => {
 				if (e.target?.result !== null) {
-					setImage(e.target?.result);
+					const result = e.target?.result;
+
+					if (result === undefined) {
+						setImage(null);
+					} else {
+						setImage(result);
+					}
 				}
 			};
 

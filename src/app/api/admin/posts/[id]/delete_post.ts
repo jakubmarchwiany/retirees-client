@@ -9,7 +9,7 @@ import { NextResponse } from "next/server";
 export async function DeletePost(
 	req: Request,
 	{ params }: { params: { id: string } }
-): Promise<NextResponse> {
+): Promise<any> {
 	try {
 		const { id } = params;
 

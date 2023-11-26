@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material";
-import { Dispatch, SetStateAction } from "react";
-import ReactQuill from "react-quill";
+import dynamic from "next/dynamic";
+import { Dispatch, SetStateAction, useMemo } from "react";
 import "react-quill/dist/quill.snow.css";
 
 type Props = {
@@ -9,6 +9,8 @@ type Props = {
 };
 
 export default function TextEditor({ content, setContent }: Props): JSX.Element {
+	const ReactQuill = useMemo(() => dynamic(() => import("react-quill"), { ssr: false }), []);
+
 	const modules = {
 		toolbar: [
 			[{ header: [1, 2, 3, 4, 5] }],
