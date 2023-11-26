@@ -14,8 +14,8 @@ export default function UserButton(): JSX.Element {
 	return (
 		<Stack alignItems="center" direction="row">
 			<MyLinkButton
-				href=""
-				isActive={path === ""}
+				href="/"
+				isActive={path === "/"}
 				props={{ startIcon: <Info /> }}
 				text={isPhone ? "" : "Informacje"}
 			/>
