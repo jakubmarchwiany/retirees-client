@@ -1,0 +1,30 @@
+{
+	"dictionaries": ["typescript", "css"],
+	"language": "en,pl",
+	"words": [
+		"ampm",
+		"Bobcia",
+		"bunx",
+		"commitlint",
+		"cropperjs",
+		"envalid",
+		"Firestore",
+		"fontsource",
+		"knip",
+		"lockb",
+		"NEXTAUTH",
+		"outdir",
+		"reduxjs",
+		"uuidv"
+	],
+	"ignorePaths": [
+		"firebase_config.json",
+		"key_google_bucket.json",
+		"node_modules",
+		"build",
+		"bun.lockb",
+		".commitlint.config.cjs",
+		"src/__tests__/generator"
+	],
+	"import": ["node_modules/cspell-dict-pl_pl/cspell-ext.json"]
+}
