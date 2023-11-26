@@ -31,6 +31,10 @@ yarn-error.log*
 key_google_bucket.json
 firebase_config.json
 
+# cache
+.cspellcache
+.eslintcache
+
 
 # vercel
 .vercel

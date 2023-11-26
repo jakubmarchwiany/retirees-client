@@ -14,11 +14,11 @@
 		"start": "next start",
 		"tests": "NODE_ENV=test bun test",
 		"tests:dev": "NODE_ENV=test bun --watch test",
-		"lint": "eslint ./src",
-		"lint:fix": "eslint ./src --fix",
+		"lint": "eslint ./src --cache",
+		"lint:fix": "eslint ./src --fix --cache",
 		"lint:knip": "knip",
-		"lint:prettier": "prettier . --write",
-		"lint:spelling": "cspell . --quiet",
+		"lint:prettier": "prettier . --write --cache --log-level silent",
+		"lint:spelling": "cspell . --quiet --cache",
 		"prepare": "husky install"
 	},
 	"dependencies": {
