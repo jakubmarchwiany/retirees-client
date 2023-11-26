@@ -1,18 +1,10 @@
 import { PostType } from "@/types/post.type";
-import { Timestamp, collection, getDocs, orderBy, query } from "firebase/firestore";
+import { PostFirebaseType } from "@/types/post_firebase.type";
+import { collection, getDocs, orderBy, query } from "firebase/firestore";
 
 import { addPrefix, db } from "../firebase";
 
 const { GOOGLE_BUCKET_IMAGES_URL } = process.env;
-
-type PostFirebaseType = {
-	title: string;
-	startDate: Timestamp;
-	endDate: Timestamp | null;
-	createdDate: Timestamp;
-	image: null | string;
-	content: string;
-};
 
 export async function getPosts(): Promise<PostType[]> {
 	const queryHandler = query(collection(db, addPrefix("posts")), orderBy("createdDate", "desc"));
