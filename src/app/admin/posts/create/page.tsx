@@ -4,9 +4,9 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 "use client";
 
-import DateForm from "@/app/admin/post/create/components/DateForm";
-import TextEditor from "@/app/admin/post/create/components/TextEditor";
-import { postValidation } from "@/app/admin/post/create/components/post.validation";
+import DateForm from "@/app/admin/posts/create/components/DateForm";
+import TextEditor from "@/app/admin/posts/create/components/TextEditor";
+import { postValidation } from "@/app/admin/posts/create/components/post.validation";
 import Post from "@/app/components/post/Post";
 import { dataURLtoFile } from "@/app/components/utils/dataURLToFile";
 import { myFetch } from "@/app/components/utils/myFetch";

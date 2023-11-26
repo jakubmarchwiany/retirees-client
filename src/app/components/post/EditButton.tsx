@@ -8,7 +8,7 @@ type Props = {
 
 export default function EditButton({ id }: Props): JSX.Element {
 	return (
-		<Link href={`/admin/post/${id}/edit`} passHref style={{ textDecoration: "none" }}>
+		<Link href={`/admin/posts/${id}/edit`} passHref style={{ textDecoration: "none" }}>
 			<IconButton
 				size="small"
 				sx={{
