@@ -10,23 +10,23 @@ import { postValidation } from "@/app/admin/post/create/components/post.validati
 import Post from "@/app/components/post/Post";
 import { dataURLtoFile } from "@/app/components/utils/dataURLToFile";
 import { myFetch } from "@/app/components/utils/myFetch";
-import { sleep } from "@/app/components/utils/sleep";
 import { LoadingButton } from "@mui/lab";
 import { Stack, TextField, Typography } from "@mui/material";
 import { Dayjs } from "dayjs";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useTransition } from "react";
 
 import { ImageSelector } from "./components/image/ImageSelector";
 
-export default function NewPostPage(): JSX.Element {
+export default function CreatePostPage(): JSX.Element {
 	const [title, setTitle] = useState<string>("");
-	const [startDate, setStartDate] = useState<Dayjs | undefined>(undefined);
-	const [endDate, setEndDate] = useState<Dayjs | undefined>(undefined);
-	const [cropImage, setCropImage] = useState<string | undefined>(undefined);
+	const [startDate, setStartDate] = useState<Dayjs | null>(null);
+	const [endDate, setEndDate] = useState<Dayjs | null>(null);
+	const [cropImage, setCropImage] = useState<null | string>(null);
 	const [content, setContent] = useState<string>("");
-
 	const [isLoading, setIsLoading] = useState<boolean>(false);
+
+	const [isPending, startTransition] = useTransition();
 
 	const router = useRouter();
 
@@ -38,13 +38,13 @@ export default function NewPostPage(): JSX.Element {
 
 			formData.append("startDate", startDate!.toString());
 
-			if (cropImage !== undefined) {
+			if (cropImage !== null) {
 				const file = dataURLtoFile(cropImage, `post_image.png`);
 
 				formData.append("file", file);
 			}
 
-			if (endDate !== undefined) {
+			if (endDate !== null) {
 				formData.append("endDate", endDate.toString());
 			}
 
@@ -58,10 +58,10 @@ export default function NewPostPage(): JSX.Element {
 				headers: undefined,
 				customError: true
 			})
-				.then(async () => {
-					await sleep(2000);
+				.then(() => {
+					startTransition(() => router.push("/admin"));
 
-					router.push("/admin");
+					startTransition(() => router.refresh());
 				})
 				.catch(() => {
 					setIsLoading(false);
@@ -106,10 +106,11 @@ export default function NewPostPage(): JSX.Element {
 
 			<Post
 				content={content}
-				endDate={endDate && endDate.toString()}
+				createdDate={new Date().toString()}
+				endDate={endDate !== null ? endDate.toString() : null}
 				id="1"
 				image={cropImage}
-				startDate={startDate !== undefined ? startDate.toString() : "Brak daty"}
+				startDate={startDate !== null ? startDate.toString() : "Brak daty"}
 				title={title}
 			/>
 
