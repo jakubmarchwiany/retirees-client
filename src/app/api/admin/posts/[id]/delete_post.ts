@@ -1,9 +1,8 @@
+import { addPrefix, db } from "@/app/api/db/firebase";
 import { createResponse } from "@/app/api/utils/create_response";
-import {
-	deletePostImageFromBucket,
-	downloadPostsFromBucket,
-	savePostsToBucket
-} from "@/app/api/utils/google_bucket.api";
+import { deletePostImageFromBucket } from "@/app/api/utils/google_bucket.api";
+import { PostFirebaseType } from "@/types/post_firebase.type";
+import { deleteDoc, doc, getDoc } from "firebase/firestore";
 import { revalidateTag } from "next/cache";
 import { NextResponse } from "next/server";
 
@@ -14,20 +13,18 @@ export async function DeletePost(
 	try {
 		const { id } = params;
 
-		const postsData = await downloadPostsFromBucket();
+		const postToDeleteRef = doc(db, addPrefix("posts"), id);
 
-		const postToDelate = postsData.find((p) => p.id === id);
+		const postToDeleteSnap = await getDoc(postToDeleteRef);
 
-		if (postToDelate !== undefined) {
-			const updatedPosts = postsData.filter((p) => p.id !== id);
+		if (postToDeleteSnap.exists()) {
+			const postToDelate = postToDeleteSnap.data() as PostFirebaseType;
 
-			console.error(postToDelate);
-
-			if (postToDelate.image !== undefined) {
+			if (postToDelate.image !== null) {
 				await deletePostImageFromBucket(postToDelate.image);
 			}
 
-			await savePostsToBucket(updatedPosts);
+			await deleteDoc(postToDeleteRef);
 
 			revalidateTag("posts_update");
 
