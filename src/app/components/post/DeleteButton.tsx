@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
 import { myFetch } from "../utils/myFetch";
-import { sleep } from "../utils/sleep";
 
 type Props = {
 	id: string;
@@ -20,9 +19,7 @@ export default function DeleteButton({ id }: Props): JSX.Element {
 
 		myFetch(`/admin/posts/${id}`, {
 			method: "DELETE"
-		}).then(async () => {
-			await sleep(2000);
-
+		}).then(() => {
 			navigate.refresh();
 		});
 	};
