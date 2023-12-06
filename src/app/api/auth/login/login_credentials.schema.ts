@@ -7,14 +7,14 @@ type LoginData = {
 };
 
 const loginDataSchema: JSONSchemaType<LoginData> = {
-	type: "object",
+	additionalProperties: false,
 	properties: {
-		username: { type: "string" },
 		password: { type: "string" },
-		rememberMe: { type: "boolean" }
+		rememberMe: { type: "boolean" },
+		username: { type: "string" }
 	},
 	required: ["username", "password", "rememberMe"],
-	additionalProperties: false
+	type: "object"
 };
 
 export { loginDataSchema };

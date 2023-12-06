@@ -3,15 +3,15 @@ import { Card, CardHeader, Container, Divider, Skeleton, Stack } from "@mui/mate
 export default function Loading(): JSX.Element {
 	return (
 		<Container component="main">
-			<Stack spacing={{ xs: 1, sm: 1.5, lg: 2 }}>
-				<Stack spacing={{ xs: 1, sm: 1.5, lg: 2 }}>
+			<Stack spacing={{ lg: 2, sm: 1.5, xs: 1 }}>
+				<Stack spacing={{ lg: 2, sm: 1.5, xs: 1 }}>
 					{Array.from({ length: 3 }, (_, index) => (
 						<Card
 							key={index}
 							sx={{
-								width: "100%",
+								backgroundColor: "rgba(255, 255, 255, 0.15)",
 								borderRadius: 2,
-								backgroundColor: "rgba(255, 255, 255, 0.15)"
+								width: "100%"
 							}}
 						>
 							<CardHeader
@@ -38,7 +38,7 @@ export default function Loading(): JSX.Element {
 							<Skeleton
 								animation="wave"
 								height={150}
-								sx={{ my: 2, ml: "5%" }}
+								sx={{ ml: "5%", my: 2 }}
 								variant="rounded"
 								width="90%"
 							/>

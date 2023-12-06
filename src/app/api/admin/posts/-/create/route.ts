@@ -12,10 +12,10 @@ export async function POST(req: Request): Promise<any> {
 		const formData = await req.formData();
 
 		const postToCheck = {
-			title: formData.get("title"),
-			startDate: formData.get("startDate"),
+			content: formData.get("content"),
 			endDate: formData.get("endDate"),
-			content: formData.get("content")
+			startDate: formData.get("startDate"),
+			title: formData.get("title")
 		};
 
 		const { content, endDate, startDate, title } = validateObject<CreatePostData>(
@@ -24,12 +24,12 @@ export async function POST(req: Request): Promise<any> {
 		);
 
 		const newPost = {
-			title,
-			startDate: new Date(startDate),
-			endDate: endDate !== null ? new Date(endDate) : null,
 			content,
+			createdDate: new Date(),
+			endDate: endDate !== null ? new Date(endDate) : null,
 			image: null as unknown as string,
-			createdDate: new Date()
+			startDate: new Date(startDate),
+			title
 		};
 
 		if (formData.has("file")) {

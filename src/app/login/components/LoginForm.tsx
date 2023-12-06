@@ -31,9 +31,9 @@ export function LoginForm(): JSX.Element {
 		setLoading(true);
 
 		myFetch(`/auth/login`, {
-			method: "POST",
-			body: JSON.stringify({ username, password, rememberMe }),
-			customError: true
+			body: JSON.stringify({ password, rememberMe, username }),
+			customError: true,
+			method: "POST"
 		})
 			.then(async () => {
 				await sleep(500);

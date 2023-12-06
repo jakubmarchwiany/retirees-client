@@ -16,12 +16,12 @@ export default function Navbar(): JSX.Element {
 			elevation={0}
 			position="static"
 			sx={{
-				top: "auto",
 				background: "transparent",
-				boxShadow: 3
+				boxShadow: 3,
+				top: "auto"
 			}}
 		>
-			<Toolbar sx={{ justifyContent: "space-between", alignItems: "center" }}>
+			<Toolbar sx={{ alignItems: "center", justifyContent: "space-between" }}>
 				<Stack alignItems="center" direction="row">
 					<Typography
 						sx={{

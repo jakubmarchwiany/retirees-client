@@ -1,6 +1,15 @@
 import { TextField, TextFieldProps, styled } from "@mui/material";
 
 const StyledTextField = styled(TextField)<TextFieldProps>(({ theme }) => ({
+	"& .MuiOutlinedInput-root": {
+		"&.Mui-focused fieldset": {
+			borderColor: theme.palette.secondary.main
+		},
+		"&:hover fieldset": {
+			borderColor: theme.palette.primary.main
+		},
+		backgroundColor: "#f5f5f5"
+	},
 	"& input": {
 		color: theme.palette.primary.contrastText
 	},
@@ -9,15 +18,6 @@ const StyledTextField = styled(TextField)<TextFieldProps>(({ theme }) => ({
 	},
 	"& label.Mui-focused": {
 		color: theme.palette.primary.contrastText
-	},
-	"& .MuiOutlinedInput-root": {
-		backgroundColor: "#f5f5f5",
-		"&:hover fieldset": {
-			borderColor: theme.palette.primary.main
-		},
-		"&.Mui-focused fieldset": {
-			borderColor: theme.palette.secondary.main
-		}
 	}
 }));
 

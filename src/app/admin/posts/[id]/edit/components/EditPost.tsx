@@ -44,9 +44,9 @@ export default function EditPost({
 			setIsLoading(true);
 
 			myFetch(`/admin/posts/${initId}`, {
-				method: "PATCH",
-				body: JSON.stringify({ title, startDate, endDate, content }),
-				customError: true
+				body: JSON.stringify({ content, endDate, startDate, title }),
+				customError: true,
+				method: "PATCH"
 			})
 				.then(() => {
 					router.push("/admin");
@@ -67,7 +67,7 @@ export default function EditPost({
 				alignItems="center"
 				justifyContent="center"
 				mb={5}
-				sx={{ width: { xs: "95%", sm: "80%", md: "70%", lg: "60%", xl: "50%" } }}
+				sx={{ width: { lg: "60%", md: "70%", sm: "80%", xl: "50%", xs: "95%" } }}
 			>
 				<Typography component="h1" variant="h2">
 					Edytuj post
@@ -108,7 +108,7 @@ export default function EditPost({
 				color="success"
 				loading={isLoading}
 				onClick={editPost}
-				sx={{ mt: 2, width: { xs: "95%", sm: "80%", md: "70%", lg: "60%", xl: "50%" } }}
+				sx={{ mt: 2, width: { lg: "60%", md: "70%", sm: "80%", xl: "50%", xs: "95%" } }}
 				variant="contained"
 			>
 				Edytuj Post

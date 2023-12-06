@@ -13,9 +13,9 @@ describe("Auth controller", () => {
 	describe("/auth/login", () => {
 		it("should_return_200_for_valid_data", async () => {
 			res = await request(API_URL).post("/auth/login").send({
-				username: USERNAME_CORRECT,
 				password: PASSWORD_CORRECT,
-				rememberMe: true
+				rememberMe: true,
+				username: USERNAME_CORRECT
 			});
 
 			console.error(res.body);
@@ -25,9 +25,9 @@ describe("Auth controller", () => {
 
 		it("should_return_400_for_invalid_credentials", async () => {
 			res = await request(API_URL).post("/auth/login").send({
-				username: chance.string(),
 				password: chance.string(),
-				rememberMe: true
+				rememberMe: true,
+				username: chance.string()
 			});
 
 			expect(res.statusCode).toBe(400);
@@ -51,8 +51,8 @@ describe("Auth controller", () => {
 
 		it("should_return_400_for_missing_remember_me", async () => {
 			res = await request(API_URL).post("/auth/login").send({
-				username: USERNAME_CORRECT,
-				password: PASSWORD_CORRECT
+				password: PASSWORD_CORRECT,
+				username: USERNAME_CORRECT
 			});
 
 			expect(res.statusCode).toBe(400);

@@ -35,7 +35,7 @@ export default async function HomePage({
 	};
 
 	return (
-		<Stack alignItems="center" justifyContent="center" spacing={{ xs: 1, sm: 1.5, lg: 2 }}>
+		<Stack alignItems="center" justifyContent="center" spacing={{ lg: 2, sm: 1.5, xs: 1 }}>
 			{generatePosts()}
 
 			<PostsPagination currentPage={Number(currentPage)} numberOfPages={0} />

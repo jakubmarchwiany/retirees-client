@@ -2,45 +2,27 @@ import { createTheme, responsiveFontSizes } from "@mui/material";
 
 const theme = responsiveFontSizes(
 	createTheme({
-		palette: {
-			primary: {
-				main: "#133478",
-				contrastText: "#fff"
-			},
-			secondary: {
-				main: "#fff",
-				contrastText: "#133478"
-			},
-			background: {
-				default: "#fff",
-				paper: "#fff"
-			},
-			divider: "#D3D3D3"
-		},
-		typography: {
-			fontFamily: ["sans-serif"].join(",")
-		},
 		breakpoints: {
 			values: {
-				xs: 0,
-				sm: 769,
-				md: 1024,
 				lg: 1216,
-				xl: 1408
+				md: 1024,
+				sm: 769,
+				xl: 1408,
+				xs: 0
 			}
 		},
 		components: {
-			MuiInputBase: {
-				styleOverrides: {
-					root: {
-						color: "#fff"
-					}
-				}
-			},
 			MuiCssBaseline: {
 				styleOverrides: {
 					body: {
 						backgroundColor: "#133478"
+					}
+				}
+			},
+			MuiInputBase: {
+				styleOverrides: {
+					root: {
+						color: "#fff"
 					}
 				}
 			},
@@ -52,11 +34,29 @@ const theme = responsiveFontSizes(
 					}
 				}
 			}
+		},
+		palette: {
+			background: {
+				default: "#fff",
+				paper: "#fff"
+			},
+			divider: "#D3D3D3",
+			primary: {
+				contrastText: "#fff",
+				main: "#133478"
+			},
+			secondary: {
+				contrastText: "#133478",
+				main: "#fff"
+			}
+		},
+		typography: {
+			fontFamily: ["sans-serif"].join(",")
 		}
 	})
 );
 
-export const standardSize = { xs: "95%", sm: "50%", md: "40%", lg: "35%", xl: "25%" };
-export const panelStandardSize = { xs: "95%", sm: "80%", md: "70%", lg: "60%", xl: "50%" };
+export const standardSize = { lg: "35%", md: "40%", sm: "50%", xl: "25%", xs: "95%" };
+export const panelStandardSize = { lg: "60%", md: "70%", sm: "80%", xl: "50%", xs: "95%" };
 
 export default theme;

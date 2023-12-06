@@ -8,18 +8,18 @@ export default function LoginPage(): JSX.Element {
 			component="main"
 			maxWidth={false}
 			sx={{
+				alignItems: "center",
 				display: "flex",
-				justifyContent: "center",
-				alignItems: "center"
+				justifyContent: "center"
 			}}
 		>
 			<Stack alignItems="center">
 				<Avatar
 					sx={{
 						bgcolor: "primary.main",
-						width: "5rem",
+						color: "white",
 						height: "5rem",
-						color: "white"
+						width: "5rem"
 					}}
 				>
 					<LockOpenOutlined fontSize="large" />

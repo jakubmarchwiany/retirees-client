@@ -19,10 +19,10 @@ export async function myFetch<T>(
 		const toastId = toast.loading("Ładowanie...");
 
 		fetch(window.location.origin + "/api" + url, {
-			method: options.method,
+			body: options.body,
 			credentials: "include",
 			headers: options.headers,
-			body: options.body
+			method: options.method
 		})
 			.then(async (response) => {
 				const data = (await response.json()) as T & { message: string };

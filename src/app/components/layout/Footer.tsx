@@ -6,8 +6,8 @@ export default function Footer(): JSX.Element {
 			<Typography
 				align="center"
 				sx={{
-					mt: 0.5,
 					color: "white",
+					mt: 0.5,
 					mx: "10%"
 				}}
 				variant="subtitle1"

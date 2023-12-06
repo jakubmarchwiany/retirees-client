@@ -39,8 +39,8 @@ export default function NextAppDirEmotionCacheProvider(
 
 			if (cache.inserted[serialized.name] === undefined) {
 				inserted.push({
-					name: serialized.name,
-					isGlobal: !selector
+					isGlobal: !selector,
+					name: serialized.name
 				});
 			}
 			return prevInsert(...args);

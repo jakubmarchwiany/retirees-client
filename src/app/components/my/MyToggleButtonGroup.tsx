@@ -5,8 +5,8 @@ export const MyToggleButtonGroup = styled(ToggleButtonGroup)<ToggleButtonProps>(
 	...(theme.palette.mode === "light"
 		? {
 				"& .MuiToggleButton-root.Mui-selected": {
-					color: "white",
-					backgroundColor: lighten(theme.palette.primary.main, 0.3)
+					backgroundColor: lighten(theme.palette.primary.main, 0.3),
+					color: "white"
 				},
 				"& .MuiToggleButton-root.Mui-selected:hover": {
 					backgroundColor: theme.palette.primary.main
@@ -14,8 +14,8 @@ export const MyToggleButtonGroup = styled(ToggleButtonGroup)<ToggleButtonProps>(
 		  }
 		: {
 				"& .MuiToggleButton-root.Mui-selected": {
-					color: "white",
-					backgroundColor: theme.palette.primary.main
+					backgroundColor: theme.palette.primary.main,
+					color: "white"
 				},
 				"& .MuiToggleButton-root.Mui-selected:hover": {
 					backgroundColor: lighten(theme.palette.primary.main, 0.1)

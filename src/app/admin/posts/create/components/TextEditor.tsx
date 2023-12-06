@@ -25,7 +25,7 @@ export default function TextEditor({ content, setContent }: Props): JSX.Element 
 
 	return (
 		<>
-			<Typography sx={{ mt: 2, mb: 1 }} textAlign="center" variant="h4">
+			<Typography sx={{ mb: 1, mt: 2 }} textAlign="center" variant="h4">
 				Treść posta
 			</Typography>
 
@@ -33,9 +33,9 @@ export default function TextEditor({ content, setContent }: Props): JSX.Element 
 				modules={modules}
 				onChange={setContent}
 				style={{
-					width: "100%",
+					background: "white",
 					color: "black",
-					background: "white"
+					width: "100%"
 				}}
 				theme="snow"
 				value={content}

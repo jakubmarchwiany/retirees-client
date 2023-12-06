@@ -17,13 +17,13 @@ export async function getPosts(): Promise<PostType[]> {
 		const postFb = doc.data() as PostFirebaseType;
 
 		validPosts.push({
-			id: doc.id,
-			title: postFb.title,
-			startDate: postFb.startDate.toDate().toString(),
-			endDate: postFb.endDate !== null ? postFb.endDate.toDate().toString() : null,
-			image: postFb.image !== null ? GOOGLE_BUCKET_IMAGES_URL + postFb.image : null,
 			content: postFb.content,
-			createdDate: postFb.createdDate.toDate().toString()
+			createdDate: postFb.createdDate.toDate().toString(),
+			endDate: postFb.endDate !== null ? postFb.endDate.toDate().toString() : null,
+			id: doc.id,
+			image: postFb.image !== null ? GOOGLE_BUCKET_IMAGES_URL + postFb.image : null,
+			startDate: postFb.startDate.toDate().toString(),
+			title: postFb.title
 		});
 	});
 

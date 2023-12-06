@@ -25,19 +25,19 @@ export default function ImageEditor({ selectedImage, saveCropImage }: Props): JS
 		<Modal
 			open={true}
 			sx={{
-				overflow: "scroll",
-				marginBottom: "5%"
+				marginBottom: "5%",
+				overflow: "scroll"
 			}}
 		>
 			<Stack
 				bgcolor="background.paper"
 				color="text.primary"
 				sx={{
+					boxShadow: 10,
+					left: "50%",
 					position: "absolute" as const,
 					top: "5%",
-					left: "50%",
-					transform: "translate(-50%, 0%)",
-					boxShadow: 10
+					transform: "translate(-50%, 0%)"
 				}}
 			>
 				<Button

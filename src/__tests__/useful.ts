@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { expect } from "bun:test";
 import request, { Request } from "supertest";
@@ -26,8 +25,8 @@ export const authPostRequest = (url: string, token: string): request.Request => 
 
 export const getUserToken = async (): Promise<string> => {
 	const res = await request(API_URL).post("/auth/login").send({
-		username: USERNAME_CORRECT,
-		password: PASSWORD_CORRECT
+		password: PASSWORD_CORRECT,
+		username: USERNAME_CORRECT
 	});
 
 	return res.body.data.token;

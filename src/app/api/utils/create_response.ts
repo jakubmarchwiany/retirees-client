@@ -6,7 +6,7 @@ export function createResponse(
 	body?: unknown
 ): NextResponse<{ message: string }> {
 	return NextResponse.json(
-		{ message, data: body },
+		{ data: body, message },
 		{
 			status: statusCode
 		}

@@ -53,10 +53,10 @@ export default function CreatePostPage(): JSX.Element {
 			setIsLoading(true);
 
 			myFetch("/admin/posts/-/create", {
-				method: "POST",
 				body: formData,
+				customError: true,
 				headers: undefined,
-				customError: true
+				method: "POST"
 			})
 				.then(() => {
 					startTransition(() => router.push("/admin"));
@@ -75,7 +75,7 @@ export default function CreatePostPage(): JSX.Element {
 				alignItems="center"
 				justifyContent="center"
 				mb={5}
-				sx={{ width: { xs: "95%", sm: "80%", md: "70%", lg: "60%", xl: "50%" } }}
+				sx={{ width: { lg: "60%", md: "70%", sm: "80%", xl: "50%", xs: "95%" } }}
 			>
 				<Typography component="h1" variant="h2">
 					Kreator posta
@@ -118,7 +118,7 @@ export default function CreatePostPage(): JSX.Element {
 				color="success"
 				loading={isLoading}
 				onClick={addPost}
-				sx={{ mt: 2, width: { xs: "95%", sm: "80%", md: "70%", lg: "60%", xl: "50%" } }}
+				sx={{ mt: 2, width: { lg: "60%", md: "70%", sm: "80%", xl: "50%", xs: "95%" } }}
 				variant="contained"
 			>
 				Dodaj Post

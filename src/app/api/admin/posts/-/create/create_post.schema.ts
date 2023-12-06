@@ -8,20 +8,20 @@ type CreatePostData = {
 };
 
 const createPostDataSchema: JSONSchemaType<CreatePostData> = {
-	type: "object",
 	properties: {
-		title: { type: "string", minLength: 3 },
-		startDate: { type: "string", minLength: 10 },
+		content: { minLength: 10, type: "string" },
 		endDate: {
-			type: ["string", "null"],
 			oneOf: [
-				{ type: "string", minLength: 10 },
-				{ type: "null", nullable: true }
-			]
+				{ minLength: 10, type: "string" },
+				{ nullable: true, type: "null" }
+			],
+			type: ["string", "null"]
 		},
-		content: { type: "string", minLength: 10 }
+		startDate: { minLength: 10, type: "string" },
+		title: { minLength: 3, type: "string" }
 	},
-	required: ["title", "startDate", "endDate", "content"]
+	required: ["title", "startDate", "endDate", "content"],
+	type: "object"
 };
 
 export { createPostDataSchema };

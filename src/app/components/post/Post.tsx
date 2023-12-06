@@ -26,23 +26,23 @@ export default function Post({ title, startDate, endDate, image, content }: Post
 	return (
 		<Card
 			sx={{
-				width: { xs: "95%", sm: "80%", md: "70%", lg: "60%", xl: "50%" },
-				borderRadius: 5,
 				backgroundColor: "background.default",
-				boxShadow: 15
+				borderRadius: 5,
+				boxShadow: 15,
+				width: { lg: "60%", md: "70%", sm: "80%", xl: "50%", xs: "95%" }
 			}}
 		>
 			<CardHeader
 				subheader={
 					<Typography
 						alignContent="center"
-						sx={{ typography: { xs: "caption", sm: "h6" } }}
+						sx={{ typography: { sm: "h6", xs: "caption" } }}
 					>
 						{subheader(startDate, endDate)}
 					</Typography>
 				}
 				title={
-					<Typography sx={{ typography: { xs: "h6", sm: "h4" } }}>
+					<Typography sx={{ typography: { sm: "h4", xs: "h6" } }}>
 						{title ? title : "Brak tytułu"}
 					</Typography>
 				}
@@ -55,8 +55,8 @@ export default function Post({ title, startDate, endDate, image, content }: Post
 						component="img"
 						image={image}
 						sx={{
-							objectFit: "contain",
-							minWidth: "100%"
+							minWidth: "100%",
+							objectFit: "contain"
 							// width: "680px",
 							// height: "380px"
 						}}

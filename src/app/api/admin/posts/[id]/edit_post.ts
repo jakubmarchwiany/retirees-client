@@ -18,10 +18,10 @@ export async function EditPost(req: Request, { params }: { params: { id: string 
 		const postToUpdate = doc(db, addPrefix("posts"), id);
 
 		const updatedPost = {
-			title,
-			startDate: new Date(startDate),
 			content,
-			endDate: endDate !== null ? new Date(endDate) : null
+			endDate: endDate !== null ? new Date(endDate) : null,
+			startDate: new Date(startDate),
+			title
 		};
 
 		await updateDoc(postToUpdate, updatedPost);

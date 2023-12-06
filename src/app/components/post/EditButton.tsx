@@ -13,14 +13,14 @@ export default function EditButton({ id }: Props): JSX.Element {
 				size="small"
 				sx={{
 					position: "absolute",
-					top: "5px",
 					right: {
-						xs: "4%",
-						sm: "11%",
-						md: "16%",
 						lg: "21%",
-						xl: "25.5%"
-					}
+						md: "16%",
+						sm: "11%",
+						xl: "25.5%",
+						xs: "4%"
+					},
+					top: "5px"
 				}}
 			>
 				<Edit color="primary" fontSize="large" />

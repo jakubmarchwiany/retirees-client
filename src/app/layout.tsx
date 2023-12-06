@@ -23,7 +23,7 @@ export default function RootLayout({ children }: { children: JSX.Element }): JSX
 							component="main"
 							flex={1}
 							overflow="auto"
-							py={{ xs: 1, sm: 2, lg: 3 }}
+							py={{ lg: 3, sm: 2, xs: 1 }}
 						>
 							{children}
 						</Box>

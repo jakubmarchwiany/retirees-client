@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 
 const { NODE_ENV, GOOGLE_KEY_FILE_NAME, GOOGLE_PROJECT_ID, GOOGLE_BUCKET_NAME } = process.env;
 
-const storage = new Storage({ projectId: GOOGLE_PROJECT_ID, keyFilename: GOOGLE_KEY_FILE_NAME });
+const storage = new Storage({ keyFilename: GOOGLE_KEY_FILE_NAME, projectId: GOOGLE_PROJECT_ID });
 
 const bucket = storage.bucket(GOOGLE_BUCKET_NAME);
 
