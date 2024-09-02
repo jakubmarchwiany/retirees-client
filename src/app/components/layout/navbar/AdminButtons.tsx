@@ -1,7 +1,7 @@
 "use client";
 
-import theme from "@/app/components/ThemeRegistry/theme";
 import MyLinkButton from "@/app/components/my/MyLinkButton";
+import theme from "@/app/components/theme/theme";
 import { AllInbox, Edit, Logout, PostAdd } from "@mui/icons-material";
 import { Button, Stack, useMediaQuery } from "@mui/material";
 import Cookies from "js-cookie";

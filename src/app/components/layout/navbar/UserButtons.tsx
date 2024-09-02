@@ -1,7 +1,7 @@
 "use client";
 
-import theme from "@/app/components/ThemeRegistry/theme";
 import MyLinkButton from "@/app/components/my/MyLinkButton";
+import theme from "@/app/components/theme/theme";
 import { ContactMail, Info, Login } from "@mui/icons-material";
 import { Stack, useMediaQuery } from "@mui/material";
 import { usePathname } from "next/navigation";
